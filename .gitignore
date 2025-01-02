@@ -1,0 +1,43 @@
+# Dependências do Node.js
+/node_modules/
+
+# Arquivos de compilação do TypeScript
+/dist/
+/*.tsbuildinfo
+
+# Arquivos de compilação do Webpack
+/webpack.config.js
+/.webpack/
+/*.log
+
+# Arquivos de configuração do TypeScript
+/tsconfig.tsbuildinfo
+
+# Arquivos temporários do sistema operacional
+.DS_Store    # Para sistemas macOS
+Thumbs.db    # Para sistemas Windows
+
+# Arquivos de saída gerados pelo sistema de build
+*.tgz        # Arquivos de pacotes
+*.zip        # Arquivos comprimidos gerados
+
+# Arquivos e pastas de IDEs (exemplo: VSCode, WebStorm, etc.)
+.vscode/
+.idea/
+
+# Arquivos de backup de editores de texto (ex: VSCode, Sublime Text, etc.)
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Arquivos de cache do npm
+.npm/
+
+# Logs do npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos gerados pelo sistema operacional
+Desktop.ini    # Para sistemas Windows
