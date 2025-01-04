@@ -1,7 +1,20 @@
+:root {
+    --cor-primaria-branco: white;
+    --cor-secundaria-verde: #298906;
+    --cor-tercearia-verde: #64B16D;
+    --cor-quartaria-cinza: #8d8d8d;
+    --cor-quintaria-laranja: #FFC14C;
+    --cor-sextaria-azul: #3BAEDA;
+    --cor-contatos-verde: #044B19;
+    --cor-btn-adicionar: #27612F;
+    --cor-input-verde: #CFFCDC;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "League Spartan", serif;
 }
 
 body{ 
@@ -12,26 +25,79 @@ body{
     background-repeat: no-repeat;
 }
 
+.contatos {
+    background: var(--cor-contatos-verde);
+    display: flex;
+    margin: 10px 0px;
+    width: 5em;
+}
+
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 160px;
+    gap: 12em;
     height: 100vh;
 }
 
-.form {
+.icons {
+    display: flex;
+}
+
+form {
     display: flex;
     flex-direction: column;
+}
+
+form input{
+    width: 30vw;
+    height: 8vh;
+    margin-top: 8px;
+    background: var(--cor-input-verde);
+    border: none;
+    border-radius: 3px;
+    font-size: large;
+    padding-left: 16px;
+}
+
+form input:focus {
+  outline: 3px solid var(--cor-secundaria-verde);
+}
+
+form input::placeholder {
+    color: var(--cor-quartaria-cinza);
+    padding-left: 10px;    
+    font-size: 20px;
+}
+
+form label{
+    color: var(--cor-primaria-branco);
+    margin-top: 25px;
 }
 
 .btn-add {
     display: flex;
     align-items: center;
-    padding: 10px 12px;
+    align-self: flex-end;
+    justify-content: center;
+    margin-top: 28px;
+    font-weight: 500;
+    font-size: 100%;
+    padding: 10px;
+    width: 140px;
     border-radius: 3px;
-    gap: 21px;
-    color: white;
-    background: #27612F;
+    cursor: pointer;
+    gap: 15px;
+    color: var(--cor-primaria-branco );
+    background: var(--cor-btn-adicionar);
     border: none;
+    transition: .2s ease-in-out;
+}
+
+.btn-add:hover {
+    background: var(--cor-sextaria-azul);
+}
+
+.btn-add span {
+    margin-top: 5px;
 }
