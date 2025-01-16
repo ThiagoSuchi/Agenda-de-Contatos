@@ -17,8 +17,9 @@
     font-family: "League Spartan", serif;
 }
 
-body{ 
-    height: 100vh;
+body {
+    overflow-x: hidden;
+    height: 100%;
     background-image: url(./image/background.jpg);
     background-size: cover;
     background-position: center;
@@ -26,10 +27,47 @@ body{
 }
 
 .contatos {
-    background: var(--cor-contatos-verde);
     display: flex;
-    margin: 10px 0px;
-    width: 5em;
+    align-items: center;
+    margin-left: auto;
+    position: relative;
+    margin-top: 20px;
+    background: var(--cor-contatos-verde);
+    padding: 10px 20px;
+    width: 4em;
+    gap: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+    transition: .1s ease-in-out;
+}
+
+.overlay {
+    position: absolute;
+    top: 8px;
+    left: -5px;
+    right: -10px;
+    bottom: -7px;
+    background-color: var(--cor-tercearia-verde);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    z-index: -1;
+}
+
+.text-cnt {
+    display: none;
+    color: var(--cor-primaria-branco);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.contatos:hover .text-cnt {
+    display: block;
+    margin-top: 4px;
+}
+
+.contatos:hover {
+    width: 10em;
 }
 
 .container {
@@ -37,7 +75,7 @@ body{
     align-items: center;
     justify-content: center;
     gap: 12em;
-    height: 100vh;
+    height: 80vh;
 }
 
 .icons {
@@ -49,7 +87,7 @@ form {
     flex-direction: column;
 }
 
-form input{
+form input {
     width: 30vw;
     height: 8vh;
     margin-top: 8px;
@@ -61,16 +99,16 @@ form input{
 }
 
 form input:focus {
-  outline: 3px solid var(--cor-secundaria-verde);
+    outline: 3px solid var(--cor-secundaria-verde);
 }
 
 form input::placeholder {
     color: var(--cor-quartaria-cinza);
-    padding-left: 10px;    
+    padding-left: 10px;
     font-size: 20px;
 }
 
-form label{
+form label {
     color: var(--cor-primaria-branco);
     margin-top: 25px;
 }
@@ -88,7 +126,7 @@ form label{
     border-radius: 3px;
     cursor: pointer;
     gap: 15px;
-    color: var(--cor-primaria-branco );
+    color: var(--cor-primaria-branco);
     background: var(--cor-btn-adicionar);
     border: none;
     transition: .2s ease-in-out;
