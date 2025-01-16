@@ -50,8 +50,6 @@ agenda-de-contatos/
 │   │   │   └── storage.ts      # Funções relacionadas ao localStorage
 │   │   └── utils/              # Funções utilitárias
 │   │       └── validation.ts   # Validação de e-mail e telefone
-│   ├── styles/                 # Arquivos de estilos
-│   │   └── style.css           # Estilo principal
 │   └── index.ts                # Arquivo de entrada do Webpack
 ├── webpack.config.js           # Configuração do Webpack
 ├── package.json                # Gerenciamento de dependências

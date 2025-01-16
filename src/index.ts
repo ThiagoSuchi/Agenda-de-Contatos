@@ -1,2 +1,4 @@
-console.log('Hello World');
+import { input } from "./scripts/app";
+
+console.log(input?.target);
 
