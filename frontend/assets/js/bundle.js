@@ -22,9 +22,92 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   input: () => (/* binding */ input)
+/* harmony export */   form: () => (/* binding */ form)
 /* harmony export */ });
-const input = document.querySelector('form');
+/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+
+
+const addBtn = document.querySelector('.btn-add');
+const form = document.querySelector('.form');
+addBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const inputs = form.querySelectorAll('input');
+    const nome = document.querySelector('#nome');
+    inputs.forEach((inp) => {
+        if (inp.id === 'nome')
+            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validNome)(nome.value);
+    });
+    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validNome)(nome.value) === true) {
+        _services_msgErro__WEBPACK_IMPORTED_MODULE_0__.span.style.display = 'none';
+    }
+});
+
+
+/***/ }),
+
+/***/ "./src/scripts/services/msgErro.ts":
+/*!*****************************************!*\
+  !*** ./src/scripts/services/msgErro.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   msgErro: () => (/* binding */ msgErro),
+/* harmony export */   span: () => (/* binding */ span)
+/* harmony export */ });
+const span = document.querySelector('.error-message');
+function msgErro(msg) {
+    if (span) {
+        span.innerText = msg;
+        span.style.display = 'block';
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/scripts/utils/validacoes.ts":
+/*!*****************************************!*\
+  !*** ./src/scripts/utils/validacoes.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   validNome: () => (/* binding */ validNome)
+/* harmony export */ });
+/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/msgErro */ "./src/scripts/services/msgErro.ts");
+// Validações do Form
+
+// Validando nome
+function validNome(nome) {
+    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+)*$/;
+    if (nome.trim() === '') {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('Porfavor, preencha o campo.');
+        return false;
+    }
+    if (nome.length < 4) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('O nome deve possuir no mínimo 4 caracteres!');
+        return false;
+    }
+    if (!nomeRegex.test(nome)) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
+        return false;
+    }
+    return true;
+}
+// Validando email
+// export function validEmail(email: string): string {
+//     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//     return emailRegex.test(email)
+// }
+// // Validando telefone
+// export function validTelefone(telefone: string): string {
+//     const telRegex = /^\(?\d{2}\)?[\s-]?(9\d{4}|\d{4})[\s-]?\d{4}$/;
+//     return telRegex.test(telefone)
+// }
 
 
 /***/ })
@@ -92,11 +175,10 @@ var __webpack_exports__ = {};
   !*** ./src/index.ts ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _scripts_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/app */ "./src/scripts/app.ts");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _scripts_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scripts/app */ "./src/scripts/app.ts");
 
 
-console.log(_scripts_app__WEBPACK_IMPORTED_MODULE_0__.input === null || _scripts_app__WEBPACK_IMPORTED_MODULE_0__.input === void 0 ? void 0 : _scripts_app__WEBPACK_IMPORTED_MODULE_0__.input.target);
 
 })();
 

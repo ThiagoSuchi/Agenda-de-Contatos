@@ -5,6 +5,7 @@
     --cor-quartaria-cinza: #8d8d8d;
     --cor-quintaria-laranja: #FFC14C;
     --cor-sextaria-azul: #3BAEDA;
+    --cor-msgErro-vermelho: rgb(245, 72, 72);
     --cor-contatos-verde: #044B19;
     --cor-btn-adicionar: #27612F;
     --cor-input-verde: #CFFCDC;
@@ -111,6 +112,23 @@ form input::placeholder {
 form label {
     color: var(--cor-primaria-branco);
     margin-top: 25px;
+}
+
+form .error-message {
+    color: var(--cor-msgErro-vermelho);
+    margin-top: 5px;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    display: none;
+}
+
+form .erro-borda input[type = text] {
+    border-color: var(--cor-msgErro-vermelho);
+}
+
+form .erro-borda .error-message {
+    display: block;
 }
 
 .btn-add {
