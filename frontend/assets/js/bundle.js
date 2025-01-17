@@ -2,6 +2,18 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/style.css":
+/*!***********************!*\
+  !*** ./src/style.css ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/scripts/app.ts":
 /*!****************************!*\
   !*** ./src/scripts/app.ts ***!
@@ -81,6 +93,8 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scripts_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scripts/app */ "./src/scripts/app.ts");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+
 
 console.log(_scripts_app__WEBPACK_IMPORTED_MODULE_0__.input === null || _scripts_app__WEBPACK_IMPORTED_MODULE_0__.input === void 0 ? void 0 : _scripts_app__WEBPACK_IMPORTED_MODULE_0__.input.target);
 
