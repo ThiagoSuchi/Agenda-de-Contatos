@@ -32,12 +32,10 @@ const email = document.querySelector('#email');
 const telefone = document.querySelector('#telefone');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    console.log(e.target);
     if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposVazios)(nome, email))
         return;
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validNome)(nome);
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEmail)(email);
-    console.log(e.target);
 });
 
 

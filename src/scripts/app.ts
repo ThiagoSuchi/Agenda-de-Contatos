@@ -8,13 +8,10 @@ const telefone = document.querySelector('#telefone') as HTMLInputElement;
 
 form.addEventListener('submit', function (e: Event) {
     e.preventDefault();
-    console.log(e.target);
+    
     if (!camposVazios(nome, email)) return;
-
     validNome(nome);
     validEmail(email)
-    console.log(e.target);
-    
 })
 
 
