@@ -8,6 +8,7 @@
     "start": "webpack serve --hot"
   },
   "devDependencies": {
+    "@types/validator": "^13.12.2",
     "mini-css-extract-plugin": "^2.9.2",
     "ts-loader": "^9.5.2",
     "webpack": "^5.97.1",
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "css-loader": "^7.1.2",
-    "style-loader": "^4.0.0"
+    "style-loader": "^4.0.0",
+    "validator": "^13.12.0"
   }
 }

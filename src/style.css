@@ -116,19 +116,12 @@ form label {
 
 form .error-message {
     color: var(--cor-msgErro-vermelho);
-    margin-top: 5px;
-    font-size: 1.2rem;
+    margin-top: 7px;
+    width: 460px;
+    font-size: 1.1rem;
     font-weight: 400;
     font-style: italic;
     display: none;
-}
-
-form .erro-borda input[type = text] {
-    border-color: var(--cor-msgErro-vermelho);
-}
-
-form .erro-borda .error-message {
-    display: block;
 }
 
 .btn-add {
