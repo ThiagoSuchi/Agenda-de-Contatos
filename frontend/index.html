@@ -37,45 +37,29 @@
 
     <div class="container">
       <form class="form" action="#">
-        <label for="nome">NOME:</label>
-        <input type="text" id="nome" placeholder="Digite seu nome"/>
-        <span class="error-message">Erro encontrado</span>
+        <div class="form-div">
+          <label for="nome">NOME:</label>
+          <input type="text" id="nome" placeholder="Digite seu nome"/>
+          <span class="error-message"></span>
+        </div>
 
-        <label for="email">E-MAIL:</label>
-        <input
-          type="text"
-          id="email"
-          placeholder="ex: exemplo@gmail.com"
-        />
-        <span class="error-message">Erro encontrado</span>
-
-        <label for="telefone">TELEFONE:</label>
-        <input
-          type="text"
-          id="telefone"
-          placeholder="ex: (XX) XXXXX-XXXX"
-        />
-        <span class="error-message">Erro encontrado</span>
+        <div class="form-div">
+          <label for="email">E-MAIL:</label>
+          <input type="text" id="email" placeholder="ex: exemplo@gmail.com"/>
+          <span class="error-message"></span>
+        </div>
+    
+        <div class="form-div">
+          <label for="telefone">TELEFONE:</label>
+          <input type="text" id="telefone" placeholder="ex: (XX) XXXXX-XXXX"/>
+          <span class="error-message"></span>
+        </div>
 
         <button class="btn-add">
-          <span>ADCIONAR</span
-          ><svg
-            class="icon"
-            width="19"
-            height="21"
-            viewBox="0 0 19 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M11.9419 9.21485H7.04836M9.49511 6.8976V11.6461M14.2124 1H4.77778C2.69315 1 1 2.65247 1 4.66582V18.047C1 19.7564 2.26252 20.4782 3.80887 19.652L8.58492 17.0783C9.09384 16.8029 9.91595 16.8029 10.4151 17.0783L15.1911 19.652C16.7375 20.4877 18 19.7659 18 18.047V4.66582C17.9902 2.65247 16.2971 1 14.2124 1Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+          <h1>ADCIONAR</h1>
+          <svg class="icon" width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.9419 9.21485H7.04836M9.49511 6.8976V11.6461M14.2124 1H4.77778C2.69315 1 1 2.65247 1 4.66582V18.047C1 19.7564 2.26252 20.4782 3.80887 19.652L8.58492 17.0783C9.09384 16.8029 9.91595 16.8029 10.4151 17.0783L15.1911 19.652C16.7375 20.4877 18 19.7659 18 18.047V4.66582C17.9902 2.65247 16.2971 1 14.2124 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        
       </form>
 
       <div class="icons">

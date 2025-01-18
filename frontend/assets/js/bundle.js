@@ -30,10 +30,14 @@ const form = document.querySelector('.form');
 const nome = document.querySelector('#nome');
 const email = document.querySelector('#email');
 const telefone = document.querySelector('#telefone');
-const addBtn = document.querySelector('.btn-add');
-form.addEventListener('click', function (e) {
+form.addEventListener('submit', function (e) {
     e.preventDefault();
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposValidos)(nome, email, telefone);
+    console.log(e.target);
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposVazios)(nome, email))
+        return;
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validNome)(nome);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEmail)(email);
+    console.log(e.target);
 });
 
 
@@ -47,15 +51,17 @@ form.addEventListener('click', function (e) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   bordaError: () => (/* binding */ bordaError),
 /* harmony export */   msgErro: () => (/* binding */ msgErro),
 /* harmony export */   span: () => (/* binding */ span)
 /* harmony export */ });
+const bordaError = 'error-message-borda';
 const span = document.querySelector('.error-message');
-function msgErro(msg) {
-    if (span) {
-        span.innerText = msg;
-        span.style.display = 'block';
-    }
+function msgErro(input, msg) {
+    const divInput = input.parentElement;
+    const errorMessage = divInput.querySelector('.error-message');
+    errorMessage.innerText = msg;
+    divInput.classList.add(bordaError);
 }
 
 
@@ -69,7 +75,7 @@ function msgErro(msg) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   camposValidos: () => (/* binding */ camposValidos),
+/* harmony export */   camposVazios: () => (/* binding */ camposVazios),
 /* harmony export */   validEmail: () => (/* binding */ validEmail),
 /* harmony export */   validNome: () => (/* binding */ validNome)
 /* harmony export */ });
@@ -80,31 +86,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Função para validar se os campos estão preenchidos
-function camposValidos(...inputs) {
+function camposVazios(...inputs) {
+    let campoValid = true;
     inputs.forEach((input) => {
         if (!input.value) {
-            (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('Porfavor, preencha o campo.');
+            (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(input, 'Porfavor, preencha o campo.');
+            campoValid = false;
         }
     });
+    return campoValid;
 }
 // Validando nome
 function validNome(nome) {
     const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+)*$/;
-    if (nome.length < 4) {
-        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('O nome deve possuir no mínimo 4 caracteres!');
+    if (nome.value.length < 4) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome deve possuir no mínimo 4 caracteres!');
         return false;
     }
-    if (!nomeRegex.test(nome)) {
-        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
+    if (!nomeRegex.test(nome.value)) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
         return false;
     }
     return true;
 }
 // Validando email
 function validEmail(email) {
-    const validandoEmail = validator__WEBPACK_IMPORTED_MODULE_1___default().isEmail(email);
+    const validandoEmail = validator__WEBPACK_IMPORTED_MODULE_1___default().isEmail(email.value);
     if (!validandoEmail) {
-        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)('formato de email inválido! Siga os parâmetros de um email exe: exemple@gmail.com');
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(email, 'formato de email inválido! Exemplo de um email válido: exemple@gmail.com');
         return false;
     }
     return validandoEmail;

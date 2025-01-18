@@ -59,7 +59,8 @@ body {
     display: none;
     color: var(--cor-primaria-branco);
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 
 .contatos:hover .text-cnt {
@@ -75,8 +76,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12em;
-    height: 80vh;
+    gap: 12rem;
+    margin-top: 5rem;
 }
 
 .icons {
@@ -86,12 +87,28 @@ body {
 form {
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: auto 20px;
 }
 
-form input {
-    width: 30vw;
+.form-div {
+    margin-top: 26px;
+}
+
+.form-div .error-message-borda input[type] {
+    border-color: var(--cor-msgErro-vermelho);
+}
+
+.form-div .error-message-borda .error-message {
+    display: block;
+}
+
+form input{
+    width: 100%;
     height: 8vh;
-    margin-top: 8px;
+    margin-top: 10px;
     background: var(--cor-input-verde);
     border: none;
     border-radius: 3px;
@@ -147,6 +164,10 @@ form .error-message {
     background: var(--cor-sextaria-azul);
 }
 
-.btn-add span {
-    margin-top: 5px;
+.btn-add h1 {
+    color: var(--cor-primaria-branco);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 4px;
+    letter-spacing: 1px;
 }
