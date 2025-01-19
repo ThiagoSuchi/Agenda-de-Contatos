@@ -97,15 +97,15 @@ body {
     margin-top: 26px;
 }
 
-.form-div .error-message-borda input[type] {
-    border-color: var(--cor-msgErro-vermelho);
+.form-div.error-message-borda input[type = text] {
+    border: 3px solid var(--cor-msgErro-vermelho);  
 }
 
 .form .error-message {
     color: var(--cor-msgErro-vermelho);
     margin-top: 7px;
     width: 460px;
-    font-size: 1.1rem;
+    font-size: 14pt;
     font-weight: 400;
     font-style: italic;
     display: none;

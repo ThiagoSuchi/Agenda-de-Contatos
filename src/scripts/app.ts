@@ -1,5 +1,5 @@
-import { msgErro, span } from "./services/msgErro";
-import { camposVazios, validEmail, validNome } from "./utils/validacoes";
+import { limparError } from "./services/limparErro";
+import { camposVazios, validEmail, validNome, validTelefone } from "./utils/validacoes";
 
 export const form = document.querySelector('.form') as HTMLFormElement;
 const nome = document.querySelector('#nome') as HTMLInputElement;
@@ -8,10 +8,13 @@ const telefone = document.querySelector('#telefone') as HTMLInputElement;
 
 form.addEventListener('submit', function (e: Event) {
     e.preventDefault();
+    limparError(this)
+
+    if (!camposVazios(nome, email, telefone)) return;
     
-    if (!camposVazios(nome, email)) return;
     validNome(nome);
     validEmail(email)
+    validTelefone(telefone)
 })
 
 

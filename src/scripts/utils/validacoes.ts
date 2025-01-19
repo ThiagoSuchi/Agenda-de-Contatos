@@ -16,35 +16,30 @@ export function camposVazios(...inputs: HTMLInputElement[]): boolean {
 }
 
 // Validando nome
-export function validNome(nome: HTMLInputElement): boolean {
-    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+)*$/
+export function validNome(nome: HTMLInputElement): void {
+    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+)*$/
 
     if (nome.value.length < 4) {
         msgErro(nome , 'O nome deve possuir no mínimo 4 caracteres!')
-        return false
     }
 
     if (!nomeRegex.test(nome.value)) {
         msgErro(nome, 'Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.')
-        return false
     }
-
-    return true
 }
 
 // Validando email
-export function validEmail(email: HTMLInputElement): boolean {
+export function validEmail(email: HTMLInputElement): void {
     const validandoEmail = validator.isEmail(email.value)
 
     if (!validandoEmail) {
         msgErro(email, 'formato de email inválido! Exemplo de um email válido: exemple@gmail.com')
-        return false
     }
-
-    return validandoEmail
 }
-// // Validando telefone
-// export function validTelefone(telefone: string): string {
-//     const telRegex = /^\(?\d{2}\)?[\s-]?(9\d{4}|\d{4})[\s-]?\d{4}$/;
-//     return telRegex.test(telefone)
-// }
+
+// Validando telefone
+export function validTelefone(telefone: HTMLInputElement): void {
+    if(!validator.isMobilePhone(telefone.value, 'pt-BR')) {
+        msgErro(telefone, 'Número de telefone inválido! digite (xx) xxxxx-xxxx')
+    }
+}

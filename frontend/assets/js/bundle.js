@@ -24,7 +24,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   form: () => (/* binding */ form)
 /* harmony export */ });
-/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+/* harmony import */ var _services_limparErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/limparErro */ "./src/scripts/services/limparErro.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+
 
 const form = document.querySelector('.form');
 const nome = document.querySelector('#nome');
@@ -32,11 +34,34 @@ const email = document.querySelector('#email');
 const telefone = document.querySelector('#telefone');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposVazios)(nome, email))
+    (0,_services_limparErro__WEBPACK_IMPORTED_MODULE_0__.limparError)(this);
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.camposVazios)(nome, email, telefone))
         return;
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validNome)(nome);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEmail)(email);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validNome)(nome);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validEmail)(email);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validTelefone)(telefone);
 });
+
+
+/***/ }),
+
+/***/ "./src/scripts/services/limparErro.ts":
+/*!********************************************!*\
+  !*** ./src/scripts/services/limparErro.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   limparError: () => (/* binding */ limparError)
+/* harmony export */ });
+/* harmony import */ var _msgErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./msgErro */ "./src/scripts/services/msgErro.ts");
+
+function limparError(form) {
+    form.querySelectorAll('.' + _msgErro__WEBPACK_IMPORTED_MODULE_0__.erro).forEach((item) => {
+        item.classList.remove(_msgErro__WEBPACK_IMPORTED_MODULE_0__.erro);
+    });
+}
 
 
 /***/ }),
@@ -49,17 +74,15 @@ form.addEventListener('submit', function (e) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   bordaError: () => (/* binding */ bordaError),
-/* harmony export */   msgErro: () => (/* binding */ msgErro),
-/* harmony export */   span: () => (/* binding */ span)
+/* harmony export */   erro: () => (/* binding */ erro),
+/* harmony export */   msgErro: () => (/* binding */ msgErro)
 /* harmony export */ });
-const bordaError = 'error-message-borda';
-const span = document.querySelector('.error-message');
+const erro = 'error-message-borda';
 function msgErro(input, msg) {
     const divInput = input.parentElement;
     const errorMessage = divInput.querySelector('.error-message');
     errorMessage.innerText = msg;
-    divInput.classList.add(bordaError);
+    divInput.classList.add(erro);
 }
 
 
@@ -75,7 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   camposVazios: () => (/* binding */ camposVazios),
 /* harmony export */   validEmail: () => (/* binding */ validEmail),
-/* harmony export */   validNome: () => (/* binding */ validNome)
+/* harmony export */   validNome: () => (/* binding */ validNome),
+/* harmony export */   validTelefone: () => (/* binding */ validTelefone)
 /* harmony export */ });
 /* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/msgErro */ "./src/scripts/services/msgErro.ts");
 /* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! validator */ "./node_modules/validator/index.js");
@@ -96,31 +120,27 @@ function camposVazios(...inputs) {
 }
 // Validando nome
 function validNome(nome) {
-    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ]+)*$/;
+    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+)*$/;
     if (nome.value.length < 4) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome deve possuir no mínimo 4 caracteres!');
-        return false;
     }
     if (!nomeRegex.test(nome.value)) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
-        return false;
     }
-    return true;
 }
 // Validando email
 function validEmail(email) {
     const validandoEmail = validator__WEBPACK_IMPORTED_MODULE_1___default().isEmail(email.value);
     if (!validandoEmail) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(email, 'formato de email inválido! Exemplo de um email válido: exemple@gmail.com');
-        return false;
     }
-    return validandoEmail;
 }
-// // Validando telefone
-// export function validTelefone(telefone: string): string {
-//     const telRegex = /^\(?\d{2}\)?[\s-]?(9\d{4}|\d{4})[\s-]?\d{4}$/;
-//     return telRegex.test(telefone)
-// }
+// Validando telefone
+function validTelefone(telefone) {
+    if (!validator__WEBPACK_IMPORTED_MODULE_1___default().isMobilePhone(telefone.value, 'pt-BR')) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(telefone, 'Número de telefone inválido! digite (xx) xxxxx-xxxx');
+    }
+}
 
 
 /***/ }),
