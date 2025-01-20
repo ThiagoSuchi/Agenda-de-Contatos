@@ -1,71 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/bundler.css" />
-    <!-- Fonte -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=League+Spartan:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
-    <!--Fonte-->
-    <title>Agenda de Contatos</title>
-  </head>
-  <body>
-    <div class="contatos">
-      <div class="overlay"></div>
-      <svg
-        width="22"
-        height="23"
-        viewBox="0 0 27 28"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M19.3856 3.61438C21.9216 3.61438 23.9608 5.66667 23.9608 8.18954C23.9608 10.6601 22 12.6732 19.5556 12.7647C19.451 12.7516 19.3333 12.7516 19.2157 12.7647M21.9085 24.5294C22.8497 24.3333 23.7386 23.9542 24.4706 23.3922C26.5098 21.8627 26.5098 19.3399 24.4706 17.8105C23.7516 17.2614 22.8758 16.8954 21.9477 16.6863M9.9085 12.5948C9.77778 12.5817 9.62092 12.5817 9.47712 12.5948C6.36601 12.4902 3.89543 9.94118 3.89543 6.80392C3.89543 3.60131 6.48366 1 9.69935 1C12.902 1 15.5033 3.60131 15.5033 6.80392C15.4902 9.94118 13.0196 12.4902 9.9085 12.5948ZM3.37255 17.4183C0.20915 19.5359 0.20915 22.9869 3.37255 25.0915C6.96732 27.4967 12.8627 27.4967 16.4575 25.0915C19.6209 22.9739 19.6209 19.5229 16.4575 17.4183C12.8758 15.0261 6.98039 15.0261 3.37255 17.4183Z"
-          stroke="white"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-      <h1 class="text-cnt">CONTATOS</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/css/bundler.css" />
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=League+Spartan:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet" />
+  <!--Fonte-->
+  <title>Agenda de Contatos</title>
+</head>
+
+<body>
+
+  <div class="contatos">
+    <div class="overlay"></div>
+    <svg width="22" height="23" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M19.3856 3.61438C21.9216 3.61438 23.9608 5.66667 23.9608 8.18954C23.9608 10.6601 22 12.6732 19.5556 12.7647C19.451 12.7516 19.3333 12.7516 19.2157 12.7647M21.9085 24.5294C22.8497 24.3333 23.7386 23.9542 24.4706 23.3922C26.5098 21.8627 26.5098 19.3399 24.4706 17.8105C23.7516 17.2614 22.8758 16.8954 21.9477 16.6863M9.9085 12.5948C9.77778 12.5817 9.62092 12.5817 9.47712 12.5948C6.36601 12.4902 3.89543 9.94118 3.89543 6.80392C3.89543 3.60131 6.48366 1 9.69935 1C12.902 1 15.5033 3.60131 15.5033 6.80392C15.4902 9.94118 13.0196 12.4902 9.9085 12.5948ZM3.37255 17.4183C0.20915 19.5359 0.20915 22.9869 3.37255 25.0915C6.96732 27.4967 12.8627 27.4967 16.4575 25.0915C19.6209 22.9739 19.6209 19.5229 16.4575 17.4183C12.8758 15.0261 6.98039 15.0261 3.37255 17.4183Z"
+        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <h1 class="text-cnt">CONTATOS</h1>
+  </div>
+
+  <button class="btn-fechar">
+    <svg width="22" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 2L2 22M22 22L2 2" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <div class="lista-contatos">
+    <div class="menu-contatos">
+      <!-- <svg id="buscar" width="22" height="23" viewBox="0 0 42 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40 41L32.2638 32.9594M33.9452 18.3397C33.9452 27.3639 26.794 34.6794 17.9726 34.6794C9.15117 34.6794 2 27.3639 2 18.3397C2 9.31553 9.15117 2 17.9726 2C26.794 2 33.9452 9.31553 33.9452 18.3397Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>   -->
+      <div class="lista">
+        <h1>TODOS OS CONTATOS:</h1>
+        <svg id="apagar" width="25" height="25" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M27 7.59688C22.375 7.13281 17.7222 6.89375 13.0833 6.89375C10.3333 6.89375 7.58333 7.03438 4.83333 7.31563L2 7.59688M9.63889 6.17656L9.94444 4.33438C10.1667 2.99844 10.3333 2 12.6806 2H16.3194C18.6667 2 18.8472 3.05469 19.0556 4.34844L19.3611 6.17656M24.0139 12.0406L23.1111 26.2016C22.9583 28.4094 22.8333 30.125 18.9583 30.125H10.0417C6.16667 30.125 6.04167 28.4094 5.88889 26.2016L4.98611 12.0406M12.1806 22.3906H16.8056M11.0278 16.7656H17.9722" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>  
+      </div>
     </div>
 
+    <!-- <nav class="cnt">
+      <svg width="25" height="25" viewBox="0 0 29 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2 8.16002C23.2 12.6667 19.3049 16.32 14.5 16.32C9.69514 16.32 5.8 12.6667 5.8 8.16002C5.8 3.65338 9.69514 0 14.5 0C19.3049 0 23.2 3.65338 23.2 8.16002ZM14.5 19.04C6.49188 19.04 0 25.129 0 32.64C0 33.391 0.649188 34 1.45 34H27.55C28.3508 34 29 33.391 29 32.64C29 25.129 22.5081 19.04 14.5 19.04Z" fill="white"/>
+      </svg>        
+      <ul>
+        
+      </ul>
+    </nav> -->
+  </div>
+
+  <main>
     <div class="container">
       <form class="form" action="#">
         <div class="form-div">
           <label for="nome">NOME:</label>
-          <input type="text" id="nome" placeholder="Digite seu nome"/>
+          <input type="text" id="nome" placeholder="Digite seu nome" />
           <span class="error-message"></span>
         </div>
-
         <div class="form-div">
           <label for="email">E-MAIL:</label>
-          <input type="text" id="email" placeholder="ex: exemplo@gmail.com"/>
+          <input type="text" id="email" placeholder="ex: exemplo@gmail.com" />
           <span class="error-message"></span>
         </div>
-    
         <div class="form-div">
           <label for="telefone">TELEFONE:</label>
-          <input type="text" id="telefone" placeholder="ex: (XX) XXXXX-XXXX"/>
+          <input type="text" id="telefone" placeholder="ex: (XX) XXXXX-XXXX" />
           <span class="error-message"></span>
         </div>
-
         <button class="btn-add">
           <h1>ADCIONAR</h1>
-          <svg class="icon" width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.9419 9.21485H7.04836M9.49511 6.8976V11.6461M14.2124 1H4.77778C2.69315 1 1 2.65247 1 4.66582V18.047C1 19.7564 2.26252 20.4782 3.80887 19.652L8.58492 17.0783C9.09384 16.8029 9.91595 16.8029 10.4151 17.0783L15.1911 19.652C16.7375 20.4877 18 19.7659 18 18.047V4.66582C17.9902 2.65247 16.2971 1 14.2124 1Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="icon" width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11.9419 9.21485H7.04836M9.49511 6.8976V11.6461M14.2124 1H4.77778C2.69315 1 1 2.65247 1 4.66582V18.047C1 19.7564 2.26252 20.4782 3.80887 19.652L8.58492 17.0783C9.09384 16.8029 9.91595 16.8029 10.4151 17.0783L15.1911 19.652C16.7375 20.4877 18 19.7659 18 18.047V4.66582C17.9902 2.65247 16.2971 1 14.2124 1Z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </button>
-        
       </form>
 
       <div class="icons">
         <img src="./icons/logo.png" alt="" />
       </div>
     </div>
-    <script src="./assets/js/bundle.js"></script>
-  </body>
+  </main>
+  <script src="./assets/js/bundle.js"></script>
+</body>
+
 </html>

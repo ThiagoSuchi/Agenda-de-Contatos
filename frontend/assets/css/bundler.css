@@ -23,7 +23,7 @@
 
 body {
     overflow-x: hidden;
-    height: 100%;
+    max-height: 100%;
     background-image: url(../js/../img/background.jpg);
     background-size: cover;
     background-position: center;
@@ -68,11 +68,60 @@ body {
 
 .contatos:hover .text-cnt {
     display: block;
-    margin-top: 4px;
+    transform: translateY(3px);
 }
 
 .contatos:hover {
     width: 10em;
+}
+
+.btn-fechar {
+    position: fixed;
+    right: 31rem;
+    top: 1rem;
+    transform: translateX(600px);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    transition: .1s ease-out;
+}
+
+.btn-fechar:hover {
+  transform: scale(1.06);
+}
+
+.menu-contatos.ativo, .btn-fechar.ativo {
+    transform: translateX(0px);
+}
+
+.menu-contatos {
+    position: fixed;
+    right: 0;
+    transform: translateX(600px);
+    top: 0;
+    width: 30%;
+    height: 100vh;
+    background: var(--cor-contatos-verde);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 50px;
+    z-index: 100;
+}
+
+.menu-contatos .lista {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 140px;
+    margin-top: 9rem;
+}
+
+.menu-contatos .lista h1 {
+    font-size: 12pt;
+    font-weight: 400;
+    margin-top: 12px;
+    letter-spacing: 1px;
+    color: var(--cor-primaria-branco);
 }
 
 .container {
@@ -125,7 +174,7 @@ body {
     background: var(--cor-input-verde);
     border: none;
     border-radius: 3px;
-    font-size: large;
+    font-size: 14pt;
     padding-left: 16px;
 }
 
