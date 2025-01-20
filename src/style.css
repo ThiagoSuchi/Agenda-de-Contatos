@@ -80,8 +80,47 @@ body {
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 2;
     transition: .1s ease-out;
+}
+
+.menu-contatos .buscar {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: end;
+    margin-left: 24rem;
+    margin-right: 4rem;
+    transform: translateY(3em);
+    padding: 0.5rem 0rem 0.5rem 0rem;
+    gap: 3px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.buscar.ativar {
+    margin-left: 0rem;
+}
+
+.buscar .lupa {
+    cursor: pointer;
+    transition: .1s ease-in-out;
+}
+
+.buscar .lupa:hover {
+    transform: scale(1.05) rotate(25deg);
+}
+
+.buscar .input-busca input {
+    background: transparent;
+    border: none;
+    border-bottom: 1.6px solid var(--cor-primaria-branco);
+    width: 15vw;
+    height: 2rem;
+    outline: none;
+    font-size: 20pt;
+    font-weight: 200;
+    padding: 5px;
+    color: var(--cor-primaria-branco);
 }
 
 .btn-fechar:hover {
@@ -95,22 +134,22 @@ body {
 .menu-contatos {
     position: fixed;
     right: 0;
-    transform: translateX(600px);
+    transform: translateX(0px);
     top: 0;
     width: 30%;
     height: 100vh;
     background: var(--cor-contatos-verde);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border-top-left-radius: 50px;
-    z-index: 100;
+    z-index: 2;
 }
 
 .menu-contatos .lista {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 140px;
-    margin-top: 9rem;
+    gap: 10rem;
+    margin-top: 7rem;
 }
 
 .menu-contatos .lista h1 {

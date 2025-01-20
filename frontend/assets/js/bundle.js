@@ -28,10 +28,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
 
 
+// Formulário
 const form = document.querySelector('.form');
 const nome = document.querySelector('#nome');
 const email = document.querySelector('#email');
 const telefone = document.querySelector('#telefone');
+// Buscar contatos
+const divBuscar = document.querySelector('.buscar');
+const lupa = document.querySelector('.lupa');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     (0,_services_limparErro__WEBPACK_IMPORTED_MODULE_0__.limparError)(this);
@@ -40,6 +44,9 @@ form.addEventListener('submit', function (e) {
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validNome)(nome);
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validEmail)(email);
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validTelefone)(telefone);
+});
+lupa.addEventListener('click', () => {
+    divBuscar.classList.add('ativar');
 });
 
 
