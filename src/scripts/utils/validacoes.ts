@@ -1,10 +1,11 @@
 // Validações do Form
-import { msgErro } from "../services/msgErro";
+import { erro, msgErro, removeErroAoDigita } from "../services/msgErro";
 import validator from 'validator';
 
 // Função para validar se os campos estão preenchidos
 export function camposVazios(...inputs: HTMLInputElement[]): boolean {
     let campoValid = true
+
     inputs.forEach((input) => {
         if(!input.value) {
             msgErro(input, 'Porfavor, preencha o campo.')
@@ -19,6 +20,8 @@ export function camposVazios(...inputs: HTMLInputElement[]): boolean {
 export function validNome(nome: HTMLInputElement): void {
     const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+)*$/
 
+    removeErroAoDigita(nome)
+
     if (nome.value.length < 4) {
         msgErro(nome , 'O nome deve possuir no mínimo 4 caracteres!')
     }
@@ -32,6 +35,8 @@ export function validNome(nome: HTMLInputElement): void {
 export function validEmail(email: HTMLInputElement): void {
     const validandoEmail = validator.isEmail(email.value)
 
+    removeErroAoDigita(email)
+
     if (!validandoEmail) {
         msgErro(email, 'formato de email inválido! Exemplo de um email válido: exemple@gmail.com')
     }
@@ -39,7 +44,16 @@ export function validEmail(email: HTMLInputElement): void {
 
 // Validando telefone
 export function validTelefone(telefone: HTMLInputElement): void {
+    removeErroAoDigita(telefone)
+
     if(!validator.isMobilePhone(telefone.value, 'pt-BR')) {
         msgErro(telefone, 'Número de telefone inválido! digite (xx) xxxxx-xxxx')
     }
+}
+
+// Validação de formulário
+export function validFormulario (form: HTMLFormElement): boolean {
+    let valid = true
+    form.querySelectorAll('.' + erro).forEach(() => valid = false);
+    return valid
 }

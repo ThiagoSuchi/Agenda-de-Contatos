@@ -144,6 +144,21 @@ body {
     z-index: 2;
 }
 
+.scrol {
+    overflow-y: scroll;
+    max-height: calc(100vh - 15rem);
+    overflow-x: hidden;
+}
+
+.menu-contatos .scrol::-webkit-scrollbar {
+    width: 5px;
+}
+
+.menu-contatos .scrol::-webkit-scrollbar-thumb {
+    background-color: var(--cor-quartaria-cinza);
+    border-radius: 10px;
+}
+
 .menu-contatos .lista {
     display: flex;
     justify-content: center;
@@ -170,7 +185,6 @@ body {
 .menu-contatos .cnt-pessoa {
     display: flex;
     flex-direction: column;
-    align-items: center;
     list-style-type: none;
     margin-top: 5rem;
     gap: 3rem;
@@ -182,6 +196,9 @@ body {
 
 .menu-contatos .cnt-pessoa li {
     display: flex;
+    align-items: center;
+    margin-left: 4rem;
+    width: 100%;
     gap: 1rem;
     position: relative;
     padding: 10px;
@@ -197,7 +214,7 @@ body {
     content: '';
     position: absolute;
     bottom: -50%;
-    left: 25%;
+    left: 0;
     right: 25%;
     height: 1px;
     background-color: var(--cor-quartaria-cinza);

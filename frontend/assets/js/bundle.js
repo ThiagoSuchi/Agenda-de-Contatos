@@ -24,52 +24,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   form: () => (/* binding */ form)
 /* harmony export */ });
-/* harmony import */ var _services_limparErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/limparErro */ "./src/scripts/services/limparErro.ts");
-/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+/* harmony import */ var _services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/cadastrarContato */ "./src/scripts/services/cadastrarContato.ts");
+/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+
 
 
 // Formulário
 const form = document.querySelector('.form');
-const nome = document.querySelector('#nome');
-const email = document.querySelector('#email');
-const telefone = document.querySelector('#telefone');
+const inputNome = document.querySelector('#nome');
+const inputEmail = document.querySelector('#email');
+const inputTelefone = document.querySelector('#telefone');
 // Buscar contatos
 const divBuscar = document.querySelector('.buscar');
 const lupa = document.querySelector('.lupa');
+inputNome.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputNome));
+inputEmail.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEmail));
+inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputTelefone));
 // Formulário
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    (0,_services_limparErro__WEBPACK_IMPORTED_MODULE_0__.limparError)(this);
-    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.camposVazios)(nome, email, telefone))
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validNome)(nome);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validEmail)(email);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validTelefone)(telefone);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validNome)(inputNome);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validEmail)(inputEmail);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validTelefone)(inputTelefone);
+    // Se o formulário estiver com todos o campos válidos, ai ele é enviado
+    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validFormulario)(this)) {
+        const nome = inputNome.value.trim();
+        const email = inputEmail.value.trim();
+        const telefone = inputTelefone.value.trim();
+        const contato = (0,_services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__.novoContato)(nome, email, telefone);
+        console.log(contato);
+        const li = document.createElement('li');
+        const ul = document.querySelector('.cnt-pessoa');
+        li.innerHTML = `<svg width="23" height="24" viewBox="0 0 29 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2 8.16002C23.2 12.6667 19.3049 16.32 14.5 16.32C9.69514 16.32 5.8 12.6667 5.8 8.16002C5.8 3.65338 9.69514 0 14.5 0C19.3049 0 23.2 3.65338 23.2 8.16002ZM14.5 19.04C6.49188 19.04 0 25.129 0 32.64C0 33.391 0.649188 34 1.45 34H27.55C28.3508 34 29 33.391 29 32.64C29 25.129 22.5081 19.04 14.5 19.04Z" fill="white"/>
+            </svg>
+            <span class="traco">-</span>    
+            <span class="nome-cnt">${inputNome.value}</span>
+        `;
+        ul === null || ul === void 0 ? void 0 : ul.appendChild(li);
+    }
+    let input = form.querySelectorAll('input');
+    input.forEach((inp) => {
+        inp.value = '';
+    });
 });
 // Pesquisar
 lupa.addEventListener('click', () => {
     divBuscar.classList.toggle('ativar');
 });
+// Adicionadno os contatos
 
 
 /***/ }),
 
-/***/ "./src/scripts/services/limparErro.ts":
-/*!********************************************!*\
-  !*** ./src/scripts/services/limparErro.ts ***!
-  \********************************************/
+/***/ "./src/scripts/services/cadastrarContato.ts":
+/*!**************************************************!*\
+  !*** ./src/scripts/services/cadastrarContato.ts ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   limparError: () => (/* binding */ limparError)
+/* harmony export */   novoContato: () => (/* binding */ novoContato)
 /* harmony export */ });
-/* harmony import */ var _msgErro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./msgErro */ "./src/scripts/services/msgErro.ts");
-
-function limparError(form) {
-    form.querySelectorAll('.' + _msgErro__WEBPACK_IMPORTED_MODULE_0__.erro).forEach((item) => {
-        item.classList.remove(_msgErro__WEBPACK_IMPORTED_MODULE_0__.erro);
-    });
+let idUnico = 1;
+function novoContato(nome, email, telefone) {
+    // Gerando um id único, para cada contato cadastrado
+    const gerarId = () => {
+        return idUnico++;
+    };
+    const contato = {
+        id: gerarId(),
+        nome,
+        email,
+        telefone
+    };
+    return contato;
 }
 
 
@@ -84,7 +117,8 @@ function limparError(form) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   erro: () => (/* binding */ erro),
-/* harmony export */   msgErro: () => (/* binding */ msgErro)
+/* harmony export */   msgErro: () => (/* binding */ msgErro),
+/* harmony export */   removeErroAoDigita: () => (/* binding */ removeErroAoDigita)
 /* harmony export */ });
 const erro = 'error-message-borda';
 function msgErro(input, msg) {
@@ -92,6 +126,15 @@ function msgErro(input, msg) {
     const errorMessage = divInput.querySelector('.error-message');
     errorMessage.innerText = msg;
     divInput.classList.add(erro);
+}
+// Remove o erro de campo vazio ao digitar no input
+function removeErroAoDigita(input) {
+    const divInput = input.parentElement;
+    const errorMessage = divInput.querySelector('.error-message');
+    if (errorMessage) {
+        errorMessage.innerText = '';
+    }
+    divInput.classList.remove(erro);
 }
 
 
@@ -107,6 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   camposVazios: () => (/* binding */ camposVazios),
 /* harmony export */   validEmail: () => (/* binding */ validEmail),
+/* harmony export */   validFormulario: () => (/* binding */ validFormulario),
 /* harmony export */   validNome: () => (/* binding */ validNome),
 /* harmony export */   validTelefone: () => (/* binding */ validTelefone)
 /* harmony export */ });
@@ -130,6 +174,7 @@ function camposVazios(...inputs) {
 // Validando nome
 function validNome(nome) {
     const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+)*$/;
+    (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.removeErroAoDigita)(nome);
     if (nome.value.length < 4) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome deve possuir no mínimo 4 caracteres!');
     }
@@ -140,15 +185,23 @@ function validNome(nome) {
 // Validando email
 function validEmail(email) {
     const validandoEmail = validator__WEBPACK_IMPORTED_MODULE_1___default().isEmail(email.value);
+    (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.removeErroAoDigita)(email);
     if (!validandoEmail) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(email, 'formato de email inválido! Exemplo de um email válido: exemple@gmail.com');
     }
 }
 // Validando telefone
 function validTelefone(telefone) {
+    (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.removeErroAoDigita)(telefone);
     if (!validator__WEBPACK_IMPORTED_MODULE_1___default().isMobilePhone(telefone.value, 'pt-BR')) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(telefone, 'Número de telefone inválido! digite (xx) xxxxx-xxxx');
     }
+}
+// Validação de formulário
+function validFormulario(form) {
+    let valid = true;
+    form.querySelectorAll('.' + _services_msgErro__WEBPACK_IMPORTED_MODULE_0__.erro).forEach(() => valid = false);
+    return valid;
 }
 
 
