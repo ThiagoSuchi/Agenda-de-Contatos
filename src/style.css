@@ -1,14 +1,11 @@
 :root {
     --cor-primaria-branco: white;
-    --cor-secundaria-verde: #298906;
-    --cor-tercearia-verde: #64B16D;
+    --cor-tercearia-azul: #6492B1;
     --cor-quartaria-cinza: #8d8d8d;
     --cor-quintaria-laranja: #FFC14C;
     --cor-sextaria-azul: #3BAEDA;
     --cor-msgErro-vermelho: rgb(245, 72, 72);
-    --cor-contatos-verde: #044B19;
-    --cor-btn-adicionar: #27612F;
-    --cor-input-verde: #CFFCDC;
+    --cor-azul-escuro: #0D3D5E;
 }
 
 * {
@@ -20,7 +17,9 @@
 
 body {
     overflow-x: hidden;
-    max-height: 100%;
+    overflow-y: hidden;
+    min-height: 100vh;
+    min-width: 100vw;
     background-image: url(./image/background.jpg);
     background-size: cover;
     background-position: center;
@@ -33,7 +32,7 @@ body {
     margin-left: auto;
     position: relative;
     margin-top: 20px;
-    background: var(--cor-contatos-verde);
+    background: var(--cor-azul-escuro);
     padding: 10px 20px;
     width: 4em;
     gap: 15px;
@@ -49,7 +48,8 @@ body {
     left: -5px;
     right: -10px;
     bottom: -7px;
-    background-color: var(--cor-tercearia-verde);
+    max-width: 100vw;
+    background-color: var(--cor-tercearia-azul);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     z-index: -1;
@@ -84,6 +84,10 @@ body {
     transition: .1s ease-out;
 }
 
+.btn-fechar:hover {
+    transform: scale(1.06);
+}
+
 .menu-contatos .buscar {
     display: flex;
     flex-direction: row-reverse;
@@ -113,18 +117,14 @@ body {
 .buscar .input-busca input {
     background: transparent;
     border: none;
-    border-bottom: 1.6px solid var(--cor-primaria-branco);
-    width: 15vw;
+    border-bottom: 2px solid var(--cor-primaria-branco);
+    width: 16vw;
     height: 2rem;
     outline: none;
     font-size: 20pt;
     font-weight: 200;
     padding: 5px;
     color: var(--cor-primaria-branco);
-}
-
-.btn-fechar:hover {
-  transform: scale(1.06);
 }
 
 .menu-contatos.ativo, .btn-fechar.ativo {
@@ -134,11 +134,11 @@ body {
 .menu-contatos {
     position: fixed;
     right: 0;
-    transform: translateX(0px);
+    transform: translateX(600px);
     top: 0;
     width: 30%;
-    height: 100vh;
-    background: var(--cor-contatos-verde);
+    min-height: 100%;
+    background: var(--cor-azul-escuro);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border-top-left-radius: 50px;
     z-index: 2;
@@ -150,6 +150,8 @@ body {
     align-items: center;
     gap: 10rem;
     margin-top: 7rem;
+    padding: 15px;
+    border-bottom: 1px solid var(--cor-primaria-branco);
 }
 
 .menu-contatos .lista h1 {
@@ -158,6 +160,55 @@ body {
     margin-top: 12px;
     letter-spacing: 1px;
     color: var(--cor-primaria-branco);
+}
+
+.lista #apagar:hover {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.menu-contatos .cnt-pessoa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style-type: none;
+    margin-top: 5rem;
+    gap: 3rem;
+    font-size: 20pt;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--cor-primaria-branco);
+}
+
+.menu-contatos .cnt-pessoa li {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.menu-contatos .cnt-pessoa li .nome-cnt:hover {
+    color: var(--cor-tercearia-azul);
+}
+
+.cnt-pessoa li::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: 25%;
+    right: 25%;
+    height: 1px;
+    background-color: var(--cor-quartaria-cinza);
+}
+
+.cnt-pessoa li:last-child::after {
+    content: none;
+}
+
+.cnt-pessoa .traco {
+    line-height: 1;
 }
 
 .container {
@@ -192,7 +243,6 @@ body {
 .form .error-message {
     color: var(--cor-msgErro-vermelho);
     margin-top: 7px;
-    width: 460px;
     font-size: 14pt;
     font-weight: 400;
     font-style: italic;
@@ -207,7 +257,7 @@ body {
     width: 100%;
     height: 8vh;
     margin-top: 10px;
-    background: var(--cor-input-verde);
+    background: var(--cor-primaria-branco);
     border: none;
     border-radius: 3px;
     font-size: 14pt;
@@ -215,7 +265,7 @@ body {
 }
 
 .form input:focus {
-    outline: 3px solid var(--cor-secundaria-verde);
+    outline: 3px solid var(--cor-tercearia-azul);
 }
 
 .form input::placeholder {
@@ -243,7 +293,7 @@ body {
     cursor: pointer;
     gap: 15px;
     color: var(--cor-primaria-branco);
-    background: var(--cor-btn-adicionar);
+    background: var(--cor-azul-escuro);
     border: none;
     transition: .2s ease-in-out;
 }

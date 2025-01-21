@@ -11,6 +11,7 @@ const telefone = document.querySelector('#telefone') as HTMLInputElement;
 const divBuscar = document.querySelector('.buscar') as HTMLDivElement;
 const lupa = document.querySelector('.lupa') as HTMLDivElement;
 
+// Formulário
 form.addEventListener('submit', function (e: Event) {
     e.preventDefault();
     limparError(this)
@@ -22,8 +23,9 @@ form.addEventListener('submit', function (e: Event) {
     validTelefone(telefone)
 })
 
+// Pesquisar
 lupa.addEventListener('click', () => {
-    divBuscar.classList.add('ativar')
+    divBuscar.classList.toggle('ativar')
 })
 
 

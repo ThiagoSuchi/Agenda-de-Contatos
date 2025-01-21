@@ -36,6 +36,7 @@ const telefone = document.querySelector('#telefone');
 // Buscar contatos
 const divBuscar = document.querySelector('.buscar');
 const lupa = document.querySelector('.lupa');
+// Formulário
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     (0,_services_limparErro__WEBPACK_IMPORTED_MODULE_0__.limparError)(this);
@@ -45,8 +46,9 @@ form.addEventListener('submit', function (e) {
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validEmail)(email);
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_1__.validTelefone)(telefone);
 });
+// Pesquisar
 lupa.addEventListener('click', () => {
-    divBuscar.classList.add('ativar');
+    divBuscar.classList.toggle('ativar');
 });
 
 
