@@ -26,10 +26,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/cadastrarContato */ "./src/scripts/services/cadastrarContato.ts");
 /* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
-/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
 
 
 
+
+_services_storage__WEBPACK_IMPORTED_MODULE_2__.localstoage;
 // Formulário
 const form = document.querySelector('.form');
 const inputNome = document.querySelector('#nome');
@@ -44,13 +47,13 @@ inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPO
 // Formulário
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.camposVazios)(inputNome, inputEmail, inputTelefone))
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validNome)(inputNome);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validEmail)(inputEmail);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validTelefone)(inputTelefone);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validNome)(inputNome);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validEmail)(inputEmail);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validTelefone)(inputTelefone);
     // Se o formulário estiver com todos o campos válidos, ai ele é enviado
-    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_2__.validFormulario)(this)) {
+    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validFormulario)(this)) {
         const nome = inputNome.value.trim();
         const email = inputEmail.value.trim();
         const telefone = inputTelefone.value.trim();
@@ -136,6 +139,21 @@ function removeErroAoDigita(input) {
     }
     divInput.classList.remove(erro);
 }
+
+
+/***/ }),
+
+/***/ "./src/scripts/services/storage.ts":
+/*!*****************************************!*\
+  !*** ./src/scripts/services/storage.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   localstoage: () => (/* binding */ localstoage)
+/* harmony export */ });
+const localstoage = localStorage.setItem('name', 'Thiago');
 
 
 /***/ }),

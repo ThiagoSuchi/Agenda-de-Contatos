@@ -1,6 +1,9 @@
 import { novoContato } from "./services/cadastrarContato";
 import { removeErroAoDigita } from "./services/msgErro";
+import { localstoage } from "./services/storage";
 import { camposVazios, validEmail, validFormulario, validNome, validTelefone } from "./utils/validacoes";
+
+localstoage
 
 // Formulário
 export const form = document.querySelector('.form') as HTMLFormElement;

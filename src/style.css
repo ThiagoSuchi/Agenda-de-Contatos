@@ -237,7 +237,7 @@ body {
 }
 
 .icons {
-    display: flex;
+    margin-top: 2rem;
 }
 
 .form {

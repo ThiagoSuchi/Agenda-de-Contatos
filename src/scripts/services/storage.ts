@@ -1,0 +1,1 @@
+export const localstoage = localStorage.setItem('name', 'Thiago')
