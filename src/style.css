@@ -134,7 +134,7 @@ body {
 .menu-contatos {
     position: fixed;
     right: 0;
-    transform: translateX(600px);
+    transform: translateX(0px);
     top: 0;
     width: 30%;
     min-height: 100%;
