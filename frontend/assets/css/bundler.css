@@ -213,6 +213,10 @@ body {
     color: var(--cor-tercearia-azul);
 }
 
+/* .menu-contatos .editar {
+    
+} */
+
 .cnt-pessoa li::after {
     content: '';
     position: absolute;
