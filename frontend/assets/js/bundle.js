@@ -167,7 +167,7 @@ function exibirContatosLista() {
                         <span class="nome-cnt">${contato.nome}</span>
                         <button class="editar">
                             <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 21.625H21M14.125 3.5L18.5 7.25M2.875 14.75L15.1993 1.99524C16.5263 0.668257 18.6778 0.668254 20.0048 1.99523C21.3317 3.32221 21.3317 5.47367 20.0048 6.80065L7.25 19.125L1 21L2.875 14.75Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11 21.625H21M14.125 3.5L18.5 7.25M2.875 14.75L15.1993 1.99524C16.5263 0.668257 18.6778 0.668254 20.0048 1.99523C21.3317 3.32221 21.3317 5.47367 20.0048 6.80065L7.25 19.125L1 21L2.875 14.75Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     `;
