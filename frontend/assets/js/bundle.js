@@ -40,11 +40,16 @@ const inputTelefone = document.querySelector('#telefone');
 // Buscar contatos
 const divBuscar = document.querySelector('.buscar');
 const lupa = document.querySelector('.lupa');
+// Abrir e fechar lista
+const btnAbrirListaContatos = document.querySelector('.contatos');
+const menuContatos = document.querySelector('.menu-contatos');
+const btnFechar = document.querySelector('.btn-fechar');
 inputNome.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputNome));
 inputEmail.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEmail));
 inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputTelefone));
 // Formulário
-form.addEventListener('submit', function () {
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
     if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validNome)(inputNome);
@@ -67,6 +72,15 @@ form.addEventListener('submit', function () {
 // Pesquisar
 lupa.addEventListener('click', () => {
     divBuscar.classList.toggle('ativar');
+});
+//Abrindo e fechando a lista de contatos
+btnAbrirListaContatos.addEventListener('click', () => {
+    menuContatos.classList.add('ativo');
+    btnFechar.classList.add('ativo');
+});
+btnFechar.addEventListener('click', () => {
+    menuContatos.classList.remove('ativo');
+    btnFechar.classList.remove('ativo');
 });
 // Adicionando os contatos
 (0,_services_storage__WEBPACK_IMPORTED_MODULE_2__.exibirContatosLista)();

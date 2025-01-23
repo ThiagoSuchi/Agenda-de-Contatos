@@ -72,22 +72,26 @@ body {
     width: 10em;
 }
 
+.contatos:active {
+    background-color: var(--cor-sextaria-azul);
+}
+
 .btn-fechar {
     position: fixed;
     right: 31rem;
     top: 1rem;
     width: 30px;
     height: 30px;
-    transform: translateX(0px);
+    transform: translateX(600px);
     background: transparent;
     border: none;
     cursor: pointer;
     z-index: 2;
-    transition: .1s ease-out;
+    transition: .2s;
 }
 
-.btn-fechar:hover {
-    transform: scale(1.06);
+.btn-fechar.ativo:hover {
+    transform: scale(1.07);
 }
 
 .menu-contatos.ativo, .btn-fechar.ativo {
@@ -136,7 +140,7 @@ body {
 .menu-contatos {
     position: fixed;
     right: 0;
-    transform: translateX(0px);
+    transform: translateX(600px);
     top: 0;
     width: 30%;
     min-height: 100%;
@@ -144,6 +148,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     border-top-left-radius: 50px;
     z-index: 2;
+    transition: .3s ease-in-out;
 }
 
 .scrol {
@@ -201,7 +206,7 @@ body {
     flex-direction: column;
     list-style-type: none;
     margin-top: 5rem;
-    gap: 4rem;
+    gap: 3.7rem;
     font-size: 20pt;
     font-weight: 400;
     letter-spacing: 1px;
@@ -217,17 +222,19 @@ body {
     position: relative;
     padding: 10px;
     cursor: pointer;
-    transition: .2s;
     width: calc(100% - 6rem);
+    border: 1px solid var(--cor-azul-escuro);
+    transition: .1s;
+}
+
+.menu-contatos .cnt-pessoa li:hover {
+    border-radius: 10px;
+    border: 1px solid var(--cor-tercearia-azul);
 }
 
 .cnt-pessoa .nome-cnt {
     flex: 1; 
     overflow: hidden; 
-}
-
-.menu-contatos .cnt-pessoa li .nome-cnt:hover {
-    color: var(--cor-tercearia-azul);
 }
 
 .menu-contatos .editar {
@@ -237,7 +244,7 @@ body {
     border: none;
     color: var(--cor-primaria-branco);
     cursor: pointer;
-    background-color: var(--cor-azul-escuro);
+    background-color: transparent;
     transition: .1s;
 }
 

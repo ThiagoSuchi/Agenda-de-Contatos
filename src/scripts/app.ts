@@ -13,12 +13,18 @@ const inputTelefone = document.querySelector('#telefone') as HTMLInputElement;
 const divBuscar = document.querySelector('.buscar') as HTMLDivElement;
 const lupa = document.querySelector('.lupa') as HTMLDivElement;
 
+// Abrir e fechar lista
+const btnAbrirListaContatos = document.querySelector('.contatos') as HTMLDivElement;
+const menuContatos = document.querySelector('.menu-contatos') as HTMLDivElement;
+const btnFechar = document.querySelector('.btn-fechar') as HTMLButtonElement;
+
 inputNome.addEventListener('input', () => removeErroAoDigita(inputNome))
 inputEmail.addEventListener('input', () => removeErroAoDigita(inputEmail))
 inputTelefone.addEventListener('input', () => removeErroAoDigita(inputTelefone))
 
 // Formulário
-form.addEventListener('submit', function () {
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
     if (!camposVazios(inputNome, inputEmail, inputTelefone)) return;
 
     validNome(inputNome);
@@ -47,6 +53,17 @@ form.addEventListener('submit', function () {
 // Pesquisar
 lupa.addEventListener('click', () => {
     divBuscar.classList.toggle('ativar')
+})
+
+//Abrindo e fechando a lista de contatos
+btnAbrirListaContatos.addEventListener('click', () => {
+    menuContatos.classList.add('ativo');
+    btnFechar.classList.add('ativo');
+})
+
+btnFechar.addEventListener('click', () => {
+    menuContatos.classList.remove('ativo');
+    btnFechar.classList.remove('ativo');
 })
 
 // Adicionando os contatos
