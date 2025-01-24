@@ -38,6 +38,7 @@ form.addEventListener('submit', function (e) {
         const telefone = inputTelefone.value.trim();
 
         const contato = novoContato(nome, email, telefone);
+        
         localStorageFunc(contato);
     }
 
@@ -48,7 +49,6 @@ form.addEventListener('submit', function (e) {
 
     exibirContatosLista()
 })
-
 
 // Pesquisar
 lupa.addEventListener('click', () => {

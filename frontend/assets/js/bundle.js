@@ -171,9 +171,16 @@ function exibirContatosLista() {
     const contatoSalvo = JSON.parse(localStorage.getItem('contatos') || '[]');
     const ul = document.querySelector('.cnt-pessoa');
     if (ul) {
-        ul.innerHTML = ''; // garante que a ul estara vazia, para enviar o novo contato sem mandar outros contatos antigos
+        // garante que a ul estara vazia, para enviar o novo contato sem mandar outros contatos antigos
+        ul.innerHTML = '';
+        // Verifando se há algum contato salvo
+        if (!contatoSalvo || contatoSalvo.length === 0) {
+            ul.innerHTML = '<li class="sem-contato">Nenhum contato salvo.</li>';
+            return;
+        }
         contatoSalvo.forEach((contato) => {
             const li = document.createElement('li');
+            li.classList.add('contato-salvo');
             li.innerHTML = `<svg width="23" height="24" viewBox="0 0 29 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2 8.16002C23.2 12.6667 19.3049 16.32 14.5 16.32C9.69514 16.32 5.8 12.6667 5.8 8.16002C5.8 3.65338 9.69514 0 14.5 0C19.3049 0 23.2 3.65338 23.2 8.16002ZM14.5 19.04C6.49188 19.04 0 25.129 0 32.64C0 33.391 0.649188 34 1.45 34H27.55C28.3508 34 29 33.391 29 32.64C29 25.129 22.5081 19.04 14.5 19.04Z" fill="white"/>
                         </svg>
@@ -186,6 +193,35 @@ function exibirContatosLista() {
                         </button>
                     `;
             ul.appendChild(li);
+            li.addEventListener('click', (event) => {
+                const target = event.target;
+                const li = target.closest('li');
+                if (!li)
+                    return;
+                const verificandoBtnEditar = target.classList.contains('editar') || target.closest('.editar');
+                if (verificandoBtnEditar)
+                    return;
+                if (li) {
+                    const estaAtivado = li.classList.contains('ativo');
+                    // Verificando se há algum contato clicado, para que ao clicar em um contato o outro seja desclicado!
+                    const todosLi = document.querySelectorAll('ul li');
+                    todosLi.forEach((item) => {
+                        item.classList.remove('ativo');
+                        const btnEditar = item.querySelector('.editar');
+                        if (btnEditar) {
+                            btnEditar.classList.remove('ativo');
+                        }
+                    });
+                    // Se clicar ele add a class ativo, caso o contrio ele remove
+                    if (!estaAtivado) {
+                        li.classList.add('ativo');
+                        const btnEditar = li.querySelector('.editar');
+                        if (btnEditar) {
+                            btnEditar.classList.add('ativo');
+                        }
+                    }
+                }
+            });
         });
     }
 }
