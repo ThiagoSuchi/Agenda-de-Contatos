@@ -1,5 +1,6 @@
 import { novoContato } from "./services/cadastrarContato";
 import { removeErroAoDigita } from "./services/msgErro";
+import { pesquisarContato } from "./services/pesquisar";
 import { exibirContatosLista, localStorageFunc } from "./services/storage";
 import { camposVazios, validEmail, validFormulario, validNome, validTelefone } from "./utils/validacoes";
 
@@ -9,9 +10,9 @@ const inputNome = document.querySelector('#nome') as HTMLInputElement;
 const inputEmail = document.querySelector('#email') as HTMLInputElement;
 const inputTelefone = document.querySelector('#telefone') as HTMLInputElement;
 
-// Buscar contatos
-const divBuscar = document.querySelector('.buscar') as HTMLDivElement;
-const lupa = document.querySelector('.lupa') as HTMLDivElement;
+// Abrir e fechar opções lixeira
+const btnDelete = document.querySelector('.apagar') as HTMLButtonElement;
+const divOpcoes = document.querySelector('.apagar-estilo') as HTMLDivElement;
 
 // Abrir e fechar lista
 const btnAbrirListaContatos = document.querySelector('.contatos') as HTMLDivElement;
@@ -50,11 +51,6 @@ form.addEventListener('submit', function (e) {
     exibirContatosLista()
 })
 
-// Pesquisar
-lupa.addEventListener('click', () => {
-    divBuscar.classList.toggle('ativar')
-})
-
 //Abrindo e fechando a lista de contatos
 btnAbrirListaContatos.addEventListener('click', () => {
     menuContatos.classList.add('ativo');
@@ -65,6 +61,14 @@ btnFechar.addEventListener('click', () => {
     menuContatos.classList.remove('ativo');
     btnFechar.classList.remove('ativo');
 })
+
+// Abrindo e fechando opções de delete
+btnDelete.addEventListener('click', () => {
+    divOpcoes.classList.toggle('ativo')
+})
+
+// Buscar contato
+pesquisarContato()
 
 // Adicionando os contatos
 exibirContatosLista();

@@ -26,8 +26,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/cadastrarContato */ "./src/scripts/services/cadastrarContato.ts");
 /* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
-/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
-/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+/* harmony import */ var _services_pesquisar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/pesquisar */ "./src/scripts/services/pesquisar.ts");
+/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+
 
 
 
@@ -37,9 +39,9 @@ const form = document.querySelector('.form');
 const inputNome = document.querySelector('#nome');
 const inputEmail = document.querySelector('#email');
 const inputTelefone = document.querySelector('#telefone');
-// Buscar contatos
-const divBuscar = document.querySelector('.buscar');
-const lupa = document.querySelector('.lupa');
+// Abrir e fechar opções lixeira
+const btnDelete = document.querySelector('.apagar');
+const divOpcoes = document.querySelector('.apagar-estilo');
 // Abrir e fechar lista
 const btnAbrirListaContatos = document.querySelector('.contatos');
 const menuContatos = document.querySelector('.menu-contatos');
@@ -50,28 +52,24 @@ inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPO
 // Formulário
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.camposVazios)(inputNome, inputEmail, inputTelefone))
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_4__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validNome)(inputNome);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validEmail)(inputEmail);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validTelefone)(inputTelefone);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_4__.validNome)(inputNome);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_4__.validEmail)(inputEmail);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_4__.validTelefone)(inputTelefone);
     // Se o formulário estiver com todos o campos válidos, ai ele é enviado
-    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_3__.validFormulario)(this)) {
+    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_4__.validFormulario)(this)) {
         const nome = inputNome.value.trim();
         const email = inputEmail.value.trim();
         const telefone = inputTelefone.value.trim();
         const contato = (0,_services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__.novoContato)(nome, email, telefone);
-        (0,_services_storage__WEBPACK_IMPORTED_MODULE_2__.localStorageFunc)(contato);
+        (0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.localStorageFunc)(contato);
     }
     let input = form.querySelectorAll('input');
     input.forEach((inp) => {
         inp.value = '';
     });
-    (0,_services_storage__WEBPACK_IMPORTED_MODULE_2__.exibirContatosLista)();
-});
-// Pesquisar
-lupa.addEventListener('click', () => {
-    divBuscar.classList.toggle('ativar');
+    (0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.exibirContatosLista)();
 });
 //Abrindo e fechando a lista de contatos
 btnAbrirListaContatos.addEventListener('click', () => {
@@ -82,8 +80,14 @@ btnFechar.addEventListener('click', () => {
     menuContatos.classList.remove('ativo');
     btnFechar.classList.remove('ativo');
 });
+// Abrindo e fechando opções de delete
+btnDelete.addEventListener('click', () => {
+    divOpcoes.classList.toggle('ativo');
+});
+// Buscar contato
+(0,_services_pesquisar__WEBPACK_IMPORTED_MODULE_2__.pesquisarContato)();
 // Adicionando os contatos
-(0,_services_storage__WEBPACK_IMPORTED_MODULE_2__.exibirContatosLista)();
+(0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.exibirContatosLista)();
 
 
 /***/ }),
@@ -148,6 +152,59 @@ function removeErroAoDigita(input) {
 
 /***/ }),
 
+/***/ "./src/scripts/services/pesquisar.ts":
+/*!*******************************************!*\
+  !*** ./src/scripts/services/pesquisar.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   pesquisarContato: () => (/* binding */ pesquisarContato)
+/* harmony export */ });
+const divBuscar = document.querySelector('.buscar');
+const lupa = document.querySelector('.lupa');
+const inputBuscar = document.getElementById('buscar-contato');
+const semContato = document.querySelector('.sem-contato');
+function pesquisarContato() {
+    // Aqui eu fiz uma animação para o input
+    lupa.addEventListener('click', () => {
+        divBuscar.classList.toggle('ativar');
+    });
+    // Filtrando o contato específicado
+    inputBuscar.addEventListener('input', () => {
+        const value = inputFormatado(inputBuscar.value);
+        const contatos = document.querySelectorAll('ul li');
+        let contatoEncontrado = false;
+        contatos.forEach((item) => {
+            const contato = inputFormatado(item.textContent);
+            if (contato.indexOf(value) !== -1) {
+                item.style.display = 'flex';
+                contatoEncontrado = true;
+            }
+            else {
+                item.style.display = 'none';
+            }
+        });
+        if (!contatoEncontrado) {
+            semContato.style.display = 'flex';
+        }
+        // Se o input estiver vazio, o comentario é removido
+        if (inputBuscar.value === '') {
+            semContato.style.display = 'none';
+        }
+    });
+}
+// Formatando o valor recebido do input
+function inputFormatado(value) {
+    return value
+        .toLowerCase()
+        .trim();
+}
+
+
+/***/ }),
+
 /***/ "./src/scripts/services/storage.ts":
 /*!*****************************************!*\
   !*** ./src/scripts/services/storage.ts ***!
@@ -196,8 +253,7 @@ function exibirContatosLista() {
             li.addEventListener('click', (event) => {
                 const target = event.target;
                 const li = target.closest('li');
-                if (!li)
-                    return;
+                // Aqui irá verificar se oque está sendo clicado é o button ou se eu estou clicando em seu filho
                 const verificandoBtnEditar = target.classList.contains('editar') || target.closest('.editar');
                 if (verificandoBtnEditar)
                     return;

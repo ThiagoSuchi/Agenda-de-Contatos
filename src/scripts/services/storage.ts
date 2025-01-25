@@ -46,8 +46,7 @@ export function exibirContatosLista() {
                 const target = event.target as HTMLElement;
                 const li = target.closest('li');
 
-                if(!li) return;
-
+                // Aqui irá verificar se oque está sendo clicado é o button ou se eu estou clicando em seu filho
                 const verificandoBtnEditar = target.classList.contains('editar') || target.closest('.editar');
 
                 if(verificandoBtnEditar) return;

@@ -4,8 +4,9 @@
 :root {
     --cor-primaria-branco: white;
     --cor-tercearia-azul: #6492B1;
-    --cor-quartaria-cinza: #8d8d8d;
-    --cor-quintaria-laranja: #FFC14C;
+    --cor-quartaria-cinza: #7e7d7d;
+    --cor-quintaria-cinza: #263838;
+    --cor-opcoes-apagar-cinza: #1A2929;
     --cor-sextaria-azul: #3BAEDA;
     --cor-msgErro-vermelho: rgb(245, 72, 72);
     --cor-azul-escuro: #0D3D5E;
@@ -97,7 +98,8 @@ body {
     transform: scale(1.07);
 }
 
-.menu-contatos.ativo, .btn-fechar.ativo {
+.menu-contatos.ativo,
+.btn-fechar.ativo {
     transform: translateX(0px);
 }
 
@@ -143,7 +145,7 @@ body {
 .menu-contatos {
     position: fixed;
     right: 0;
-    transform: translateX(600px);
+    transform: translateX(0px);
     top: 0;
     width: 30%;
     min-height: 100%;
@@ -157,6 +159,9 @@ body {
 .cnt-pessoa .sem-contato {
     display: flex;
     justify-content: center;
+    font-size: 16pt;
+    font-weight: 300;
+    letter-spacing: 1px;
     color: var(--cor-quartaria-cinza);
 }
 
@@ -182,26 +187,36 @@ body {
     gap: 10rem;
     margin-top: 7rem;
     padding: 15px;
-    border-bottom: 1px solid var(--cor-primaria-branco);
+}
+
+.menu-contatos .borda { 
+    position: absolute;
+    margin-left: 1.6rem;
+    width: 90%;
+    height: 1px;
+    margin-top: -0.6rem;
+    background-color: var(--cor-primaria-branco);
+    border: none;
 }
 
 .menu-contatos .lista h1 {
     font-size: 12pt;
     font-weight: 400;
-    margin-top: 12px;
     letter-spacing: 1px;
     color: var(--cor-primaria-branco);
 }
 
 .lista .apagar {
-   width: 40px;
-   height: 40px;
-   border: none;
-   cursor: pointer;
-   color: var(--cor-primaria-branco);
-   border-radius: 10px;
-   background-color: var(--cor-azul-escuro);
-   transition: .2s;
+    width: 40px;
+    height: 40px;
+    gap: 5px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--cor-primaria-branco);
+    border-radius: 10px;
+    background-color: var(--cor-azul-escuro);
+    transition: .2s;
 }
 
 .lista .apagar:hover {
@@ -210,16 +225,92 @@ body {
     background-color: var(--cor-primaria-branco);
 }
 
+.opcoes-apagar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.apagar-estilo {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 2.9rem;
+    width: 13rem;
+    height: 7rem;
+    border-radius: 2px;
+    background-color: var(--cor-opcoes-apagar-cinza);
+    z-index: 1000;
+}
+
+.apagar-estilo.ativo {
+    display: flex;
+}
+
+.apagar-estilo .borda-apagar {
+    width: 87%;
+    height: 1px;
+    background-color: var(--cor-primaria-branco);
+    opacity: 0.2;
+    border: none;
+}
+
+.apagar-estilo button {
+    display: flex;
+    align-items: center;
+    text-align: start;
+    width: 100%;
+    height: 40%;
+    border: none;
+    color: var(--cor-primaria-branco);
+    padding: 23px;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 14pt;
+    font-weight: 300;
+    transition: all .2s;
+}
+
+.apagar-estilo button:hover {
+    background-color: var(--cor-quintaria-cinza);
+    color: var(--cor-primaria-branco);
+    font-weight: 400;
+}
+
+.apagar-estilo::before {
+    content: '';
+    position: absolute;
+    top: -9px; 
+    right: 11px; 
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 9px 9px 9px; 
+    border-color: transparent transparent var(--cor-opcoes-apagar-cinza); 
+}
+
 .menu-contatos .cnt-pessoa {
     display: flex;
     flex-direction: column;
     list-style-type: none;
-    margin-top: 5rem;
+    margin-top: 3rem;
     gap: 3.7rem;
     font-size: 20pt;
     font-weight: 400;
     letter-spacing: 1px;
     color: var(--cor-primaria-branco);
+}
+
+.sem-contato {
+    display: none;
+    justify-content: center;
+    font-size: 16pt;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--cor-quartaria-cinza);
 }
 
 .menu-contatos .cnt-pessoa .contato-salvo {
@@ -247,15 +338,15 @@ body {
 }
 
 .cnt-pessoa .nome-cnt {
-    flex: 1; 
-    overflow: hidden; 
+    flex: 1;
+    overflow: hidden;
 }
 
 .menu-contatos .editar {
     display: none;
     width: 40px;
     height: 40px;
-    border-radius: 10px;   
+    border-radius: 10px;
     border: none;
     color: var(--cor-primaria-branco);
     cursor: pointer;
@@ -277,7 +368,7 @@ body {
 .cnt-pessoa .contato-salvo::after {
     content: '';
     position: absolute;
-    bottom: -50%;
+    bottom: -70%;
     left: 0;
     right: 0;
     height: 1px;
@@ -317,8 +408,8 @@ body {
     margin-top: 26px;
 }
 
-.form-div.error-message-borda input[type = text] {
-    border: 3px solid var(--cor-msgErro-vermelho);  
+.form-div.error-message-borda input[type=text] {
+    border: 3px solid var(--cor-msgErro-vermelho);
 }
 
 .form .error-message {
@@ -334,7 +425,7 @@ body {
     display: block;
 }
 
-.form input{
+.form input {
     width: 100%;
     height: 8vh;
     margin-top: 10px;
