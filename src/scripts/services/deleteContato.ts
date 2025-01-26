@@ -49,29 +49,50 @@ export function deletContatos(opcao: 'unico' | 'varios') {
 
 
     if (opcao === "varios") {
-        const checkBox = Array.from(document.querySelectorAll('.checkbox'))
+        const checkBoxs = Array.from(document.querySelectorAll('.checkbox'))
         const btnApagarContatos = divApagarEstilo2.querySelector('.apagar-contato') as HTMLButtonElement;
 
-        checkBox.forEach((contato) => {
-            contato.classList.add('ativo')
-        })
+        checkBoxs.forEach((contato) => contato.classList.add('ativo'))
 
         btnApagarContatos.addEventListener('click', () => {
             abrirModal()
             divApagarEstilo2.classList.remove('ativo')
 
             btnConfirmar.addEventListener('click', () => {
-                fecharModal()
-                checkBox.forEach((checkBoxs) => {
-                    checkBoxs.classList.remove('ativo')
+                const checkMarcado = checkBoxs.some((contato) => (contato as HTMLInputElement).checked)
+                
+                if(!checkMarcado) {
+                    alert('Porfavor selecione ao menos um contato, para poder excluir.')
+                    fecharModal()
+                    checkBoxs.forEach((contato) => contato.classList.remove('ativo'))
+                    return
+                }
+
+                checkBoxs.forEach((contato) => {
+                    
+                    if ((contato as HTMLInputElement).checked) {
+                        const contatoSelecionado = contato.closest('.contato-salvo') as HTMLLIElement;
+                        const nomeSelecionado = contatoSelecionado.querySelector('.nome-cnt')?.textContent;
+                        
+                        contatoSelecionado.remove()
+
+                        const contatosAtualizados = contatosSalvos.filter((contato) => {
+                            if (nomeSelecionado){
+                                return contato.nome !== nomeSelecionado
+                            }
+                        })
+
+                        localStorage.setItem('contatos', JSON.stringify(contatosAtualizados))
+                  
+                    }
+                    contato.classList.remove('ativo')
                 })
+                fecharModal()
             })
 
             btnCancelar.addEventListener('click', () => {
-                fecharModal()
-                checkBox.forEach((checkBoxs) => {
-                    checkBoxs.classList.remove('ativo')
-                })
+                fecharModal()   
+                checkBoxs.forEach((contato) => contato.classList.remove('ativo'))
             })
         })
     }
