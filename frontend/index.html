@@ -46,9 +46,11 @@
         <input id="buscar-contato" type="text">
       </div>
     </div>
+
     <div class="lista">
       <h1>TODOS OS CONTATOS:</h1>
       <div class="opcoes-apagar">
+
         <button class="apagar">
           <svg width="25" height="25" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -56,14 +58,30 @@
               stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
+
         <div class="apagar-estilo">
-          <button>Apagar contato</button>
+          <button class="apagar-contato">Apagar contato</button>
           <hr class="borda-apagar">
-          <button>Selecionar contatos</button>
+          <button class="apagar-varios">Selecionar contatos</button>
         </div>
+
+        <div class="apagar-estilo apagar-estilo2">
+          <button class="apagar-contato">Apagar contatos</button>
+        </div>
+
+        <div class="modal-overlay" id="modal-confirm">
+          <div class="modal">
+              <p>Tem certeza de que deseja continuar com a exclusão?</p>
+              <button class="btn-confirm" id="btn-confirmar-exclusao">Sim</button>
+              <button class="btn-cancel" id="btn-cancelar-exclusao">Não</button>
+          </div>
+      </div>
+
       </div> 
     </div>
+
     <hr class="borda">
+
     <div class="scrol">
       <ul class="cnt-pessoa">
 

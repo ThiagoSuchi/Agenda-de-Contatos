@@ -1,4 +1,5 @@
 import { novoContato } from "./services/cadastrarContato";
+import { deletContatos } from "./services/deleteContato";
 import { removeErroAoDigita } from "./services/msgErro";
 import { pesquisarContato } from "./services/pesquisar";
 import { exibirContatosLista, localStorageFunc } from "./services/storage";
@@ -10,14 +11,14 @@ const inputNome = document.querySelector('#nome') as HTMLInputElement;
 const inputEmail = document.querySelector('#email') as HTMLInputElement;
 const inputTelefone = document.querySelector('#telefone') as HTMLInputElement;
 
-// Abrir e fechar opções lixeira
-const btnDelete = document.querySelector('.apagar') as HTMLButtonElement;
-const divOpcoes = document.querySelector('.apagar-estilo') as HTMLDivElement;
-
 // Abrir e fechar lista
 const btnAbrirListaContatos = document.querySelector('.contatos') as HTMLDivElement;
 const menuContatos = document.querySelector('.menu-contatos') as HTMLDivElement;
 const btnFechar = document.querySelector('.btn-fechar') as HTMLButtonElement;
+
+// Abrir e fechar opções de deletar contato
+const btnDelete = document.querySelector('.apagar') as HTMLButtonElement;
+const divOpcoes = document.querySelector('.apagar-estilo') as HTMLDivElement;
 
 inputNome.addEventListener('input', () => removeErroAoDigita(inputNome))
 inputEmail.addEventListener('input', () => removeErroAoDigita(inputEmail))
@@ -62,13 +63,21 @@ btnFechar.addEventListener('click', () => {
     btnFechar.classList.remove('ativo');
 })
 
-// Abrindo e fechando opções de delete
-btnDelete.addEventListener('click', () => {
-    divOpcoes.classList.toggle('ativo')
-})
-
 // Buscar contato
 pesquisarContato()
 
 // Adicionando os contatos
 exibirContatosLista();
+
+// Apagar contatos
+btnDelete.addEventListener('click', () => {
+    divOpcoes.classList.toggle('ativo')
+})
+
+document.querySelector('.apagar-contato')?.addEventListener('click', () => {
+    deletContatos('unico')
+})
+
+document.querySelector('.apagar-varios')?.addEventListener('click', () => {
+    deletContatos('varios')
+})

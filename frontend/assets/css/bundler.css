@@ -10,6 +10,7 @@
     --cor-sextaria-azul: #3BAEDA;
     --cor-msgErro-vermelho: rgb(245, 72, 72);
     --cor-azul-escuro: #0D3D5E;
+    --cor-modal-sim: #6DCC6D;
 }
 
 * {
@@ -156,6 +157,37 @@ body {
     transition: .3s ease-in-out;
 }
 
+.checkbox {
+    display: none;
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid var(--cor-quartaria-cinza);
+    background: var(--cor-opcoes-apagar-cinza);
+}
+
+.checkbox.ativo {
+    display: flex;
+}
+
+.checkbox::after {
+    content: "✔";
+    font-size: 2rem;
+    color: transparent; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.2s;
+}
+
+.checkbox:checked::after {
+    color: var(--cor-modal-sim); 
+}
+
 .cnt-pessoa .sem-contato {
     display: flex;
     justify-content: center;
@@ -290,6 +322,59 @@ body {
     border-style: solid;
     border-width: 0 9px 9px 9px; 
     border-color: transparent transparent var(--cor-opcoes-apagar-cinza); 
+}
+
+.apagar-estilo2.ativo {
+    height: 4rem;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.ativo {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.modal button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal .btn-confirm {
+    background-color: var(--cor-modal-sim);
+    color: var(--cor-quintaria-cinza);
+}
+
+.modal .btn-cancel {
+    background-color: var(--cor-msgErro-vermelho);
+    color: var(--cor-primaria-branco);
 }
 
 .menu-contatos .cnt-pessoa {
