@@ -1,5 +1,4 @@
 import { Contatos } from "../models/contato"
-import { deletContatos } from "./deleteContato";
 
 // Esta função cria um array de contatos salvos no localStorage, e se um novo contato for cadastrado a função salva tmbm
 export function localStorageFunc(contato: Contatos): Contatos[] {

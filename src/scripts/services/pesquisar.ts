@@ -9,8 +9,6 @@ export function pesquisarContato() {
         divBuscar.classList.toggle('ativar')
     })
 
-    
-
     // Filtrando o contato específicado
     inputBuscar.addEventListener('input', () => {
         const value = inputFormatado(inputBuscar.value);

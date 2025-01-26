@@ -133,57 +133,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   deletContatos: () => (/* binding */ deletContatos)
 /* harmony export */ });
-/* harmony import */ var _msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./msgConfirmacao */ "./src/scripts/services/msgConfirmacao.ts");
+/* harmony import */ var _utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/msgConfirmacao */ "./src/scripts/utils/msgConfirmacao.ts");
 
 function deletContatos(opcao) {
     const contatosSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
     const contatoSelecionado = document.querySelector('.contato-salvo.ativo');
     const divApagarEstilo = document.querySelector('.apagar-estilo');
     const divApagarEstilo2 = document.querySelector('.apagar-estilo2');
-    if (opcao === "varios") {
-        divApagarEstilo.classList.remove('ativo');
-        divApagarEstilo2.classList.add('ativo');
-    }
-    else if (opcao === "unico") {
-        divApagarEstilo.classList.add('ativo');
-        divApagarEstilo2.classList.remove('ativo');
-    }
-    if (!contatoSelecionado && opcao === "unico") {
-        alert('Nenhum contato foi selecionado para excluir.');
-        return;
-    }
+    const ul = document.querySelector('.cnt-pessoa');
+    // Alterna a visibilidade das caixas de opções
+    divApagarEstilo.classList.toggle('ativo', opcao === 'unico');
+    divApagarEstilo2.classList.toggle('ativo', opcao === 'varios');
     const btnConfirmar = document.getElementById("btn-confirmar-exclusao");
     const btnCancelar = document.getElementById("btn-cancelar-exclusao");
+    // Se for slecionado a opção para deletar apenas um contato
     if (opcao === 'unico') {
-        (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.abrirModal)();
+        if (!contatoSelecionado) {
+            alert('Nenhum contato foi selecionado para excluir.');
+            divApagarEstilo.classList.remove('ativo');
+            return;
+        }
+        (0,_utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.abrirModal)();
         btnConfirmar.addEventListener('click', () => {
             var _a;
             // Puxei o nome da li que esta com a class 'ativo', ou seja, é o contato que está selecionado
             const nomeSelecionado = (_a = contatoSelecionado.querySelector('.nome-cnt')) === null || _a === void 0 ? void 0 : _a.textContent;
             // Aqui eu removo o contato que está selecionado
-            const contatosAtualizados = contatosSalvos.filter((contato) => {
-                return contato.nome !== nomeSelecionado;
-            });
+            const contatosAtualizados = contatosSalvos.filter((contato) => contato.nome !== nomeSelecionado);
             // Salvei as alterações no localStorage
             localStorage.setItem('contatos', JSON.stringify(contatosAtualizados));
+            divApagarEstilo.classList.remove('ativo');
+            if (!contatosSalvos || contatosSalvos.length === 0) {
+                ul.innerHTML = '<li class="sem-contato">Nenhum contato salvo.</li>';
+            }
             // Removi o contato do DOM
             contatoSelecionado.remove();
-            (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
+            (0,_utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
         });
-        btnCancelar.addEventListener('click', _msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal);
+        btnCancelar.addEventListener('click', _utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal);
     }
+    // Aqui se caso for selecionado a opção para deletar vários contatos simultâneamente
     if (opcao === "varios") {
         const checkBoxs = Array.from(document.querySelectorAll('.checkbox'));
         const btnApagarContatos = divApagarEstilo2.querySelector('.apagar-contato');
         checkBoxs.forEach((contato) => contato.classList.add('ativo'));
         btnApagarContatos.addEventListener('click', () => {
-            (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.abrirModal)();
+            const checkMarcado = checkBoxs.some((contato) => contato.checked);
+            let contatosAtualizados = [...contatosSalvos];
+            (0,_utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.abrirModal)();
             divApagarEstilo2.classList.remove('ativo');
             btnConfirmar.addEventListener('click', () => {
-                const checkMarcado = checkBoxs.some((contato) => contato.checked);
                 if (!checkMarcado) {
                     alert('Porfavor selecione ao menos um contato, para poder excluir.');
-                    (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
+                    (0,_utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
                     checkBoxs.forEach((contato) => contato.classList.remove('ativo'));
                     return;
                 }
@@ -192,47 +194,22 @@ function deletContatos(opcao) {
                     if (contato.checked) {
                         const contatoSelecionado = contato.closest('.contato-salvo');
                         const nomeSelecionado = (_a = contatoSelecionado.querySelector('.nome-cnt')) === null || _a === void 0 ? void 0 : _a.textContent;
-                        contatoSelecionado.remove();
-                        const contatosAtualizados = contatosSalvos.filter((contato) => {
-                            if (nomeSelecionado) {
-                                return contato.nome !== nomeSelecionado;
-                            }
-                        });
+                        if (nomeSelecionado) {
+                            contatosAtualizados = contatosAtualizados.filter((contato) => contato.nome !== nomeSelecionado);
+                        }
                         localStorage.setItem('contatos', JSON.stringify(contatosAtualizados));
+                        contatoSelecionado.remove();
                     }
                     contato.classList.remove('ativo');
                 });
-                (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
+                (0,_utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
             });
             btnCancelar.addEventListener('click', () => {
-                (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
+                (0,_utils_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
                 checkBoxs.forEach((contato) => contato.classList.remove('ativo'));
             });
         });
     }
-}
-
-
-/***/ }),
-
-/***/ "./src/scripts/services/msgConfirmacao.ts":
-/*!************************************************!*\
-  !*** ./src/scripts/services/msgConfirmacao.ts ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   abrirModal: () => (/* binding */ abrirModal),
-/* harmony export */   fecharModal: () => (/* binding */ fecharModal)
-/* harmony export */ });
-function abrirModal() {
-    const modal = document.getElementById("modal-confirm");
-    modal.classList.add("ativo");
-}
-function fecharModal() {
-    const modal = document.getElementById("modal-confirm");
-    modal.classList.remove("ativo");
 }
 
 
@@ -401,6 +378,29 @@ function exibirContatosLista() {
             });
         });
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/scripts/utils/msgConfirmacao.ts":
+/*!*********************************************!*\
+  !*** ./src/scripts/utils/msgConfirmacao.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   abrirModal: () => (/* binding */ abrirModal),
+/* harmony export */   fecharModal: () => (/* binding */ fecharModal)
+/* harmony export */ });
+function abrirModal() {
+    const modal = document.getElementById("modal-confirm");
+    modal.classList.add("ativo");
+}
+function fecharModal() {
+    const modal = document.getElementById("modal-confirm");
+    modal.classList.remove("ativo");
 }
 
 
