@@ -13,9 +13,11 @@ export function removeErroAoDigita(input: HTMLInputElement): void {
    const divInput = input.parentElement as HTMLDivElement;
    const errorMessage = divInput.querySelector('.error-message') as HTMLSpanElement;
 
+   // Removi a msg de erro
    if (errorMessage) {
       errorMessage.innerText = '';
    }
 
+   // Removi a borda de erro
    divInput.classList.remove(erro);
 }

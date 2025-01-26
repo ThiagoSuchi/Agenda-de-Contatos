@@ -1,8 +1,9 @@
 import { novoContato } from "./services/cadastrarContato";
-import { deletContatos } from "./services/deleteContato";
 import { removeErroAoDigita } from "./services/msgErro";
 import { pesquisarContato } from "./services/pesquisar";
 import { exibirContatosLista, localStorageFunc } from "./services/storage";
+import { listaContatosToggle } from "./utils/abriFechaLista";
+import { opcoesApagarContato } from "./utils/funcApagar";
 import { camposVazios, validEmail, validFormulario, validNome, validTelefone } from "./utils/validacoes";
 
 // Formulário
@@ -10,15 +11,6 @@ export const form = document.querySelector('.form') as HTMLFormElement;
 const inputNome = document.querySelector('#nome') as HTMLInputElement;
 const inputEmail = document.querySelector('#email') as HTMLInputElement;
 const inputTelefone = document.querySelector('#telefone') as HTMLInputElement;
-
-// Abrir e fechar lista
-const btnAbrirListaContatos = document.querySelector('.contatos') as HTMLDivElement;
-const menuContatos = document.querySelector('.menu-contatos') as HTMLDivElement;
-const btnFechar = document.querySelector('.btn-fechar') as HTMLButtonElement;
-
-// Abrir e fechar opções de deletar contato
-const btnDelete = document.querySelector('.apagar') as HTMLButtonElement;
-const divOpcoes = document.querySelector('.apagar-estilo') as HTMLDivElement;
 
 inputNome.addEventListener('input', () => removeErroAoDigita(inputNome))
 inputEmail.addEventListener('input', () => removeErroAoDigita(inputEmail))
@@ -30,6 +22,8 @@ form.addEventListener('submit', function (e) {
     if (!camposVazios(inputNome, inputEmail, inputTelefone)) return;
 
     validNome(inputNome);
+    console.log(validNome(inputNome));
+    
     validEmail(inputEmail);
     validTelefone(inputTelefone);
 
@@ -53,15 +47,7 @@ form.addEventListener('submit', function (e) {
 })
 
 //Abrindo e fechando a lista de contatos
-btnAbrirListaContatos.addEventListener('click', () => {
-    menuContatos.classList.add('ativo');
-    btnFechar.classList.add('ativo');
-})
-
-btnFechar.addEventListener('click', () => {
-    menuContatos.classList.remove('ativo');
-    btnFechar.classList.remove('ativo');
-})
+listaContatosToggle()
 
 // Buscar contato
 pesquisarContato()
@@ -70,14 +56,4 @@ pesquisarContato()
 exibirContatosLista();
 
 // Apagar contatos
-btnDelete.addEventListener('click', () => {
-    divOpcoes.classList.toggle('ativo')
-})
-
-document.querySelector('.apagar-contato')?.addEventListener('click', () => {
-    deletContatos('unico')
-})
-
-document.querySelector('.apagar-varios')?.addEventListener('click', () => {
-    deletContatos('varios')
-})
+opcoesApagarContato()

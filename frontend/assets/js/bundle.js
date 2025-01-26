@@ -25,12 +25,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   form: () => (/* binding */ form)
 /* harmony export */ });
 /* harmony import */ var _services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/cadastrarContato */ "./src/scripts/services/cadastrarContato.ts");
-/* harmony import */ var _services_deleteContato__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/deleteContato */ "./src/scripts/services/deleteContato.ts");
-/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
-/* harmony import */ var _services_pesquisar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/pesquisar */ "./src/scripts/services/pesquisar.ts");
-/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
-/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
-var _a, _b;
+/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
+/* harmony import */ var _services_pesquisar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/pesquisar */ "./src/scripts/services/pesquisar.ts");
+/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
+/* harmony import */ var _utils_abriFechaLista__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/abriFechaLista */ "./src/scripts/utils/abriFechaLista.ts");
+/* harmony import */ var _utils_funcApagar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/funcApagar */ "./src/scripts/utils/funcApagar.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+
 
 
 
@@ -42,61 +43,40 @@ const form = document.querySelector('.form');
 const inputNome = document.querySelector('#nome');
 const inputEmail = document.querySelector('#email');
 const inputTelefone = document.querySelector('#telefone');
-// Abrir e fechar lista
-const btnAbrirListaContatos = document.querySelector('.contatos');
-const menuContatos = document.querySelector('.menu-contatos');
-const btnFechar = document.querySelector('.btn-fechar');
-// Abrir e fechar opções de deletar contato
-const btnDelete = document.querySelector('.apagar');
-const divOpcoes = document.querySelector('.apagar-estilo');
-inputNome.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_2__.removeErroAoDigita)(inputNome));
-inputEmail.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_2__.removeErroAoDigita)(inputEmail));
-inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_2__.removeErroAoDigita)(inputTelefone));
+inputNome.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputNome));
+inputEmail.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEmail));
+inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputTelefone));
 // Formulário
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_5__.camposVazios)(inputNome, inputEmail, inputTelefone))
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_5__.validNome)(inputNome);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_5__.validEmail)(inputEmail);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_5__.validTelefone)(inputTelefone);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validNome)(inputNome);
+    console.log((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validNome)(inputNome));
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validEmail)(inputEmail);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validTelefone)(inputTelefone);
     // Se o formulário estiver com todos o campos válidos, ai ele é enviado
-    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_5__.validFormulario)(this)) {
+    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validFormulario)(this)) {
         const nome = inputNome.value.trim();
         const email = inputEmail.value.trim();
         const telefone = inputTelefone.value.trim();
         const contato = (0,_services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__.novoContato)(nome, email, telefone);
-        (0,_services_storage__WEBPACK_IMPORTED_MODULE_4__.localStorageFunc)(contato);
+        (0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.localStorageFunc)(contato);
     }
     let input = form.querySelectorAll('input');
     input.forEach((inp) => {
         inp.value = '';
     });
-    (0,_services_storage__WEBPACK_IMPORTED_MODULE_4__.exibirContatosLista)();
+    (0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.exibirContatosLista)();
 });
 //Abrindo e fechando a lista de contatos
-btnAbrirListaContatos.addEventListener('click', () => {
-    menuContatos.classList.add('ativo');
-    btnFechar.classList.add('ativo');
-});
-btnFechar.addEventListener('click', () => {
-    menuContatos.classList.remove('ativo');
-    btnFechar.classList.remove('ativo');
-});
+(0,_utils_abriFechaLista__WEBPACK_IMPORTED_MODULE_4__.listaContatosToggle)();
 // Buscar contato
-(0,_services_pesquisar__WEBPACK_IMPORTED_MODULE_3__.pesquisarContato)();
+(0,_services_pesquisar__WEBPACK_IMPORTED_MODULE_2__.pesquisarContato)();
 // Adicionando os contatos
-(0,_services_storage__WEBPACK_IMPORTED_MODULE_4__.exibirContatosLista)();
+(0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.exibirContatosLista)();
 // Apagar contatos
-btnDelete.addEventListener('click', () => {
-    divOpcoes.classList.toggle('ativo');
-});
-(_a = document.querySelector('.apagar-contato')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
-    (0,_services_deleteContato__WEBPACK_IMPORTED_MODULE_1__.deletContatos)('unico');
-});
-(_b = document.querySelector('.apagar-varios')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
-    (0,_services_deleteContato__WEBPACK_IMPORTED_MODULE_1__.deletContatos)('varios');
-});
+(0,_utils_funcApagar__WEBPACK_IMPORTED_MODULE_5__.opcoesApagarContato)();
 
 
 /***/ }),
@@ -238,9 +218,11 @@ function msgErro(input, msg) {
 function removeErroAoDigita(input) {
     const divInput = input.parentElement;
     const errorMessage = divInput.querySelector('.error-message');
+    // Removi a msg de erro
     if (errorMessage) {
         errorMessage.innerText = '';
     }
+    // Removi a borda de erro
     divInput.classList.remove(erro);
 }
 
@@ -383,6 +365,63 @@ function exibirContatosLista() {
 
 /***/ }),
 
+/***/ "./src/scripts/utils/abriFechaLista.ts":
+/*!*********************************************!*\
+  !*** ./src/scripts/utils/abriFechaLista.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   listaContatosToggle: () => (/* binding */ listaContatosToggle)
+/* harmony export */ });
+const btnAbrirListaContatos = document.querySelector('.contatos');
+const menuContatos = document.querySelector('.menu-contatos');
+const btnFechar = document.querySelector('.btn-fechar');
+function listaContatosToggle() {
+    btnAbrirListaContatos.addEventListener('click', () => {
+        menuContatos.classList.add('ativo');
+        btnFechar.classList.add('ativo');
+    });
+    btnFechar.addEventListener('click', () => {
+        menuContatos.classList.remove('ativo');
+        btnFechar.classList.remove('ativo');
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/scripts/utils/funcApagar.ts":
+/*!*****************************************!*\
+  !*** ./src/scripts/utils/funcApagar.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   opcoesApagarContato: () => (/* binding */ opcoesApagarContato)
+/* harmony export */ });
+/* harmony import */ var _services_deleteContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/deleteContato */ "./src/scripts/services/deleteContato.ts");
+
+const btnDelete = document.querySelector('.apagar');
+const divOpcoes = document.querySelector('.apagar-estilo');
+function opcoesApagarContato() {
+    var _a, _b;
+    btnDelete.addEventListener('click', () => {
+        divOpcoes.classList.toggle('ativo');
+    });
+    (_a = document.querySelector('.apagar-contato')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
+        (0,_services_deleteContato__WEBPACK_IMPORTED_MODULE_0__.deletContatos)('unico');
+    });
+    (_b = document.querySelector('.apagar-varios')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
+        (0,_services_deleteContato__WEBPACK_IMPORTED_MODULE_0__.deletContatos)('varios');
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/scripts/utils/msgConfirmacao.ts":
 /*!*********************************************!*\
   !*** ./src/scripts/utils/msgConfirmacao.ts ***!
@@ -439,8 +478,15 @@ function camposVazios(...inputs) {
 }
 // Validando nome
 function validNome(nome) {
-    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9]+)*$/;
+    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+)*$/u;
+    const nomesSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
     (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.removeErroAoDigita)(nome);
+    for (let contato of nomesSalvos) {
+        if (contato.nome === nome.value) {
+            (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome inserido já esta sendo usado, porfavor digite outro nome.');
+            return;
+        }
+    }
     if (nome.value.length < 4) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome deve possuir no mínimo 4 caracteres!');
     }
@@ -466,7 +512,9 @@ function validTelefone(telefone) {
 // Validação de formulário
 function validFormulario(form) {
     let valid = true;
-    form.querySelectorAll('.' + _services_msgErro__WEBPACK_IMPORTED_MODULE_0__.erro).forEach(() => valid = false);
+    form
+        .querySelectorAll('.' + _services_msgErro__WEBPACK_IMPORTED_MODULE_0__.erro)
+        .forEach(() => valid = false);
     return valid;
 }
 
