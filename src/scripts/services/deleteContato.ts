@@ -43,37 +43,35 @@ export function deletContatos(opcao: 'unico' | 'varios') {
 
             fecharModal()
         })
+
         btnCancelar.addEventListener('click', fecharModal)
     }
 
 
     if (opcao === "varios") {
-        const inputCheck = Array.from(document.querySelectorAll('.contato-salvo .checkbox'));
-        const checkBox = document.querySelector('.checkbox.ativo') as HTMLInputElement;
+        const checkBox = Array.from(document.querySelectorAll('.checkbox'))
+        const btnApagarContatos = divApagarEstilo2.querySelector('.apagar-contato') as HTMLButtonElement;
 
-        inputCheck.map((contato) => {
+        checkBox.forEach((contato) => {
             contato.classList.add('ativo')
         })
-
-        const btnApagarContatos = divApagarEstilo2.querySelector('.apagar-contato') as HTMLButtonElement;
 
         btnApagarContatos.addEventListener('click', () => {
             abrirModal()
             divApagarEstilo2.classList.remove('ativo')
 
             btnConfirmar.addEventListener('click', () => {
-                console.log('Opaa');
-                
-                checkBox.addEventListener('change', (event) => {
-                    if ((event.target as HTMLInputElement).checked) {
-                       console.log('OOW, boa chegou aqui pelo menos');
-                    }
+                fecharModal()
+                checkBox.forEach((checkBoxs) => {
+                    checkBoxs.classList.remove('ativo')
                 })
             })
 
             btnCancelar.addEventListener('click', () => {
                 fecharModal()
-                checkBox.classList.remove('ativo')
+                checkBox.forEach((checkBoxs) => {
+                    checkBoxs.classList.remove('ativo')
+                })
             })
         })
     }

@@ -173,26 +173,25 @@ function deletContatos(opcao) {
         btnCancelar.addEventListener('click', _msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal);
     }
     if (opcao === "varios") {
-        const inputCheck = Array.from(document.querySelectorAll('.contato-salvo .checkbox'));
-        const checkBox = document.querySelector('.checkbox.ativo');
-        inputCheck.map((contato) => {
+        const checkBox = Array.from(document.querySelectorAll('.checkbox'));
+        const btnApagarContatos = divApagarEstilo2.querySelector('.apagar-contato');
+        checkBox.forEach((contato) => {
             contato.classList.add('ativo');
         });
-        const btnApagarContatos = divApagarEstilo2.querySelector('.apagar-contato');
         btnApagarContatos.addEventListener('click', () => {
             (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.abrirModal)();
             divApagarEstilo2.classList.remove('ativo');
             btnConfirmar.addEventListener('click', () => {
-                console.log('Opaa');
-                checkBox.addEventListener('change', (event) => {
-                    if (event.target.checked) {
-                        console.log('OOW, boa chegou aqui pelo menos');
-                    }
+                (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
+                checkBox.forEach((checkBoxs) => {
+                    checkBoxs.classList.remove('ativo');
                 });
             });
             btnCancelar.addEventListener('click', () => {
                 (0,_msgConfirmacao__WEBPACK_IMPORTED_MODULE_0__.fecharModal)();
-                checkBox.classList.remove('ativo');
+                checkBox.forEach((checkBoxs) => {
+                    checkBoxs.classList.remove('ativo');
+                });
             });
         });
     }
