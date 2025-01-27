@@ -1,4 +1,5 @@
 import { novoContato } from "./services/cadastrarContato";
+import { editarContatos } from "./services/editar";
 import { removeErroAoDigita } from "./services/msgErro";
 import { pesquisarContato } from "./services/pesquisar";
 import { exibirContatosLista, localStorageFunc } from "./services/storage";
@@ -46,7 +47,7 @@ form.addEventListener('submit', function (e) {
     exibirContatosLista()
 })
 
-//Abrindo e fechando a lista de contatos
+// Abrindo e fechando a lista de contatos
 listaContatosToggle()
 
 // Buscar contato
@@ -54,6 +55,9 @@ pesquisarContato()
 
 // Adicionando os contatos
 exibirContatosLista();
+
+// Editar o contato
+editarContatos()
 
 // Apagar contatos
 opcoesApagarContato()

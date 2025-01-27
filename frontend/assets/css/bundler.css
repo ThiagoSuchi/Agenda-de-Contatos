@@ -21,8 +21,8 @@
 }
 
 body {
-    overflow-x: hidden;
     overflow-y: hidden;
+    overflow-x: hidden;
     min-height: 100vh;
     min-width: 100vw;
     background-image: url(../js/../img/background.jpg);
@@ -52,6 +52,7 @@ body {
     top: 8px;
     left: -5px;
     right: -10px;
+    width: 108%;
     bottom: -7px;
     max-width: 100vw;
     background-color: var(--cor-tercearia-azul);
@@ -70,7 +71,7 @@ body {
 
 .contatos:hover .text-cnt {
     display: block;
-    transform: translateY(3px);
+    margin-top: 3px;
 }
 
 .contatos:hover {
@@ -472,12 +473,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
     gap: 12rem;
     margin-top: 5rem;
 }
 
 .icons {
     margin-top: 2rem;
+}
+
+.formulario {
+    width: 100%;
+    max-width: 500px;
 }
 
 .form {
@@ -565,6 +573,36 @@ body {
     font-weight: 500;
     margin-top: 4px;
     letter-spacing: 1px;
+}
+
+/* Formulário secundario, de edição*/
+.editar-form {
+    display: none;
+    width: 100%;
+    max-width: 600px;
+    margin-right: 0;
+}
+
+.btns-add-cancel {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.editar-form .btn-add.cancel {
+    height: 44px;
+    background-color: transparent;
+    border: 2px solid var(--cor-azul-escuro);
+}
+
+.editar-form .btn-add.cancel:hover {
+    background: var(--cor-primaria-branco);
+    border: 2px solid var(--cor-primaria-branco);
+}
+
+.editar-form .btn-add.cancel:hover h1 {
+    color: var(--cor-azul-escuro);
+    font-weight: 700;
 }
 
 /*# sourceMappingURL=bundler.css.map*/

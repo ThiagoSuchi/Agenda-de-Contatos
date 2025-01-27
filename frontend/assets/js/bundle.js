@@ -25,12 +25,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   form: () => (/* binding */ form)
 /* harmony export */ });
 /* harmony import */ var _services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/cadastrarContato */ "./src/scripts/services/cadastrarContato.ts");
-/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
-/* harmony import */ var _services_pesquisar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/pesquisar */ "./src/scripts/services/pesquisar.ts");
-/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
-/* harmony import */ var _utils_abriFechaLista__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/abriFechaLista */ "./src/scripts/utils/abriFechaLista.ts");
-/* harmony import */ var _utils_funcApagar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/funcApagar */ "./src/scripts/utils/funcApagar.ts");
-/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+/* harmony import */ var _services_editar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/editar */ "./src/scripts/services/editar.ts");
+/* harmony import */ var _services_msgErro__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/msgErro */ "./src/scripts/services/msgErro.ts");
+/* harmony import */ var _services_pesquisar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/pesquisar */ "./src/scripts/services/pesquisar.ts");
+/* harmony import */ var _services_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/storage */ "./src/scripts/services/storage.ts");
+/* harmony import */ var _utils_abriFechaLista__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/abriFechaLista */ "./src/scripts/utils/abriFechaLista.ts");
+/* harmony import */ var _utils_funcApagar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/funcApagar */ "./src/scripts/utils/funcApagar.ts");
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+
 
 
 
@@ -43,40 +45,42 @@ const form = document.querySelector('.form');
 const inputNome = document.querySelector('#nome');
 const inputEmail = document.querySelector('#email');
 const inputTelefone = document.querySelector('#telefone');
-inputNome.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputNome));
-inputEmail.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEmail));
-inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputTelefone));
+inputNome.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_2__.removeErroAoDigita)(inputNome));
+inputEmail.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_2__.removeErroAoDigita)(inputEmail));
+inputTelefone.addEventListener('input', () => (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_2__.removeErroAoDigita)(inputTelefone));
 // Formulário
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.camposVazios)(inputNome, inputEmail, inputTelefone))
+    if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validNome)(inputNome);
-    console.log((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validNome)(inputNome));
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validEmail)(inputEmail);
-    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validTelefone)(inputTelefone);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validNome)(inputNome);
+    console.log((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validNome)(inputNome));
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validEmail)(inputEmail);
+    (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validTelefone)(inputTelefone);
     // Se o formulário estiver com todos o campos válidos, ai ele é enviado
-    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_6__.validFormulario)(this)) {
+    if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validFormulario)(this)) {
         const nome = inputNome.value.trim();
         const email = inputEmail.value.trim();
         const telefone = inputTelefone.value.trim();
         const contato = (0,_services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__.novoContato)(nome, email, telefone);
-        (0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.localStorageFunc)(contato);
+        (0,_services_storage__WEBPACK_IMPORTED_MODULE_4__.localStorageFunc)(contato);
     }
     let input = form.querySelectorAll('input');
     input.forEach((inp) => {
         inp.value = '';
     });
-    (0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.exibirContatosLista)();
+    (0,_services_storage__WEBPACK_IMPORTED_MODULE_4__.exibirContatosLista)();
 });
-//Abrindo e fechando a lista de contatos
-(0,_utils_abriFechaLista__WEBPACK_IMPORTED_MODULE_4__.listaContatosToggle)();
+// Abrindo e fechando a lista de contatos
+(0,_utils_abriFechaLista__WEBPACK_IMPORTED_MODULE_5__.listaContatosToggle)();
 // Buscar contato
-(0,_services_pesquisar__WEBPACK_IMPORTED_MODULE_2__.pesquisarContato)();
+(0,_services_pesquisar__WEBPACK_IMPORTED_MODULE_3__.pesquisarContato)();
 // Adicionando os contatos
-(0,_services_storage__WEBPACK_IMPORTED_MODULE_3__.exibirContatosLista)();
+(0,_services_storage__WEBPACK_IMPORTED_MODULE_4__.exibirContatosLista)();
+// Editar o contato
+(0,_services_editar__WEBPACK_IMPORTED_MODULE_1__.editarContatos)();
 // Apagar contatos
-(0,_utils_funcApagar__WEBPACK_IMPORTED_MODULE_5__.opcoesApagarContato)();
+(0,_utils_funcApagar__WEBPACK_IMPORTED_MODULE_6__.opcoesApagarContato)();
 
 
 /***/ }),
@@ -190,6 +194,35 @@ function deletContatos(opcao) {
             });
         });
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/scripts/services/editar.ts":
+/*!****************************************!*\
+  !*** ./src/scripts/services/editar.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   editarContatos: () => (/* binding */ editarContatos)
+/* harmony export */ });
+function editarContatos() {
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target.classList.contains('editar') || target.classList.contains('edit')) {
+            console.log('opaaa');
+            toggleForm();
+        }
+    });
+}
+function toggleForm() {
+    const formulario = document.querySelector('.formulario');
+    const editForm = document.querySelector('.editar-form');
+    formulario.style.display = 'none';
+    editForm.style.display = 'flex';
 }
 
 
@@ -323,8 +356,8 @@ function exibirContatosLista() {
                         <span class="traco">-</span>    
                         <span class="nome-cnt">${contato.nome}</span>
                         <button class="editar">
-                            <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11 21.625H21M14.125 3.5L18.5 7.25M2.875 14.75L15.1993 1.99524C16.5263 0.668257 18.6778 0.668254 20.0048 1.99523C21.3317 3.32221 21.3317 5.47367 20.0048 6.80065L7.25 19.125L1 21L2.875 14.75Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg class="edit" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="edit" d="M11 21.625H21M14.125 3.5L18.5 7.25M2.875 14.75L15.1993 1.99524C16.5263 0.668257 18.6778 0.668254 20.0048 1.99523C21.3317 3.32221 21.3317 5.47367 20.0048 6.80065L7.25 19.125L1 21L2.875 14.75Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     `;
