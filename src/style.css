@@ -15,7 +15,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "League Spartan", serif;
-    outline: 1px solid red;
 }
 
 body {
@@ -522,6 +521,7 @@ body {
     border: none;
     border-radius: 3px;
     font-size: 14pt;
+    padding-left: 10px;
 }
 
 .form input:focus {

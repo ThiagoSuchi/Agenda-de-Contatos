@@ -22,7 +22,10 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   form: () => (/* binding */ form)
+/* harmony export */   form: () => (/* binding */ form),
+/* harmony export */   inputEmail: () => (/* binding */ inputEmail),
+/* harmony export */   inputNome: () => (/* binding */ inputNome),
+/* harmony export */   inputTelefone: () => (/* binding */ inputTelefone)
 /* harmony export */ });
 /* harmony import */ var _services_cadastrarContato__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/cadastrarContato */ "./src/scripts/services/cadastrarContato.ts");
 /* harmony import */ var _services_editar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/editar */ "./src/scripts/services/editar.ts");
@@ -54,7 +57,6 @@ form.addEventListener('submit', function (e) {
     if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.camposVazios)(inputNome, inputEmail, inputTelefone))
         return;
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validNome)(inputNome);
-    console.log((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validNome)(inputNome));
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validEmail)(inputEmail);
     (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_7__.validTelefone)(inputTelefone);
     // Se o formulário estiver com todos o campos válidos, ai ele é enviado
@@ -209,10 +211,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   editarContatos: () => (/* binding */ editarContatos)
 /* harmony export */ });
+/* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/validacoes */ "./src/scripts/utils/validacoes.ts");
+/* harmony import */ var _msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./msgErro */ "./src/scripts/services/msgErro.ts");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage */ "./src/scripts/services/storage.ts");
+
+
+
 function editarContatos() {
+    let contatosSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
     document.addEventListener('click', (e) => {
+        var _a, _b;
         const target = e.target;
         if (target.classList.contains('editar') || target.classList.contains('edit')) {
+            const nomeSelecionadoElement = (_a = target.closest('li')) === null || _a === void 0 ? void 0 : _a.querySelector('.nome-cnt');
+            if (nomeSelecionadoElement) {
+                const nomeSelecionado = (_b = nomeSelecionadoElement.textContent) === null || _b === void 0 ? void 0 : _b.trim();
+                // Está me retornando o nome, da li que cliquei
+                const contatoSelecionado = contatosSalvos.find(contato => contato.nome.trim() === nomeSelecionado);
+                if (contatoSelecionado) {
+                    const formEditar = document.querySelector('.editar-form');
+                    const inputEditNome = formEditar.querySelector('#nome');
+                    const inputEditEmail = formEditar.querySelector('#email');
+                    const inputEditTelefone = formEditar.querySelector('#telefone');
+                    if (!formEditar || !inputEditNome || !inputEditEmail || !inputEditTelefone) {
+                        console.log('Elemento não encontrado');
+                        return;
+                    }
+                    ;
+                    inputEditNome.value = contatoSelecionado.nome;
+                    inputEditEmail.value = contatoSelecionado.email;
+                    inputEditTelefone.value = contatoSelecionado.telefone;
+                    inputEditNome.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditNome));
+                    inputEditEmail.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditEmail));
+                    inputEditTelefone.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditTelefone));
+                    if (!formEditar.onsubmit) {
+                        formEditar.onsubmit = function (e) {
+                            e.preventDefault();
+                            if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposVazios)(inputEditNome, inputEditEmail, inputEditTelefone))
+                                return;
+                            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEditNome)(inputEditNome);
+                            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEmail)(inputEditEmail);
+                            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validTelefone)(inputEditTelefone);
+                            // Se o formulário estiver com todos o campos válidos, ai ele é enviado
+                            if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validFormulario)(this)) {
+                                const nome = inputEditNome.value.trim();
+                                const email = inputEditEmail.value.trim();
+                                const telefone = inputEditTelefone.value.trim();
+                                const contaIndex = contatosSalvos.findIndex(contato => contato.nome === contatoSelecionado.nome);
+                                if (contaIndex !== -1) {
+                                    contatosSalvos[contaIndex] = {
+                                        nome: nome,
+                                        email: email,
+                                        telefone: telefone
+                                    };
+                                }
+                                localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
+                                (0,_storage__WEBPACK_IMPORTED_MODULE_2__.exibirContatosLista)();
+                            }
+                        };
+                    }
+                }
+            }
             toggleForm();
         }
     });
@@ -223,11 +282,15 @@ function toggleForm() {
     const cancelar = document.querySelector('.btn-add.cancel');
     formulario.style.display = 'none';
     editForm.style.display = 'flex';
+    // Remove eventos duplicados
     if (cancelar) {
-        cancelar.addEventListener('click', () => {
-            formulario.style.display = 'flex';
-            editForm.style.display = 'none';
-        });
+        cancelar.removeEventListener('click', cancelarEdicao);
+        cancelar.addEventListener('click', cancelarEdicao);
+    }
+    function cancelarEdicao() {
+        formulario.style.display = 'flex';
+        editForm.style.display = 'none';
+        return;
     }
 }
 
@@ -493,6 +556,7 @@ function fecharModal() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   camposVazios: () => (/* binding */ camposVazios),
+/* harmony export */   validEditNome: () => (/* binding */ validEditNome),
 /* harmony export */   validEmail: () => (/* binding */ validEmail),
 /* harmony export */   validFormulario: () => (/* binding */ validFormulario),
 /* harmony export */   validNome: () => (/* binding */ validNome),
@@ -515,7 +579,7 @@ function camposVazios(...inputs) {
     });
     return campoValid;
 }
-// Validando nome
+// Validando nome formulário de adicionar contato
 function validNome(nome) {
     const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+)*$/u;
     const nomesSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
@@ -526,6 +590,17 @@ function validNome(nome) {
             return;
         }
     }
+    if (nome.value.length < 4) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome deve possuir no mínimo 4 caracteres!');
+    }
+    if (!nomeRegex.test(nome.value)) {
+        (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
+    }
+}
+// Validando nome formulário de editar contato
+function validEditNome(nome) {
+    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+)*$/u;
+    (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.removeErroAoDigita)(nome);
     if (nome.value.length < 4) {
         (0,_services_msgErro__WEBPACK_IMPORTED_MODULE_0__.msgErro)(nome, 'O nome deve possuir no mínimo 4 caracteres!');
     }

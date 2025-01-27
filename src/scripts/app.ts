@@ -9,9 +9,9 @@ import { camposVazios, validEmail, validFormulario, validNome, validTelefone } f
 
 // Formulário
 export const form = document.querySelector('.form') as HTMLFormElement;
-const inputNome = document.querySelector('#nome') as HTMLInputElement;
-const inputEmail = document.querySelector('#email') as HTMLInputElement;
-const inputTelefone = document.querySelector('#telefone') as HTMLInputElement;
+export const inputNome = document.querySelector('#nome') as HTMLInputElement;
+export const inputEmail = document.querySelector('#email') as HTMLInputElement;
+export const inputTelefone = document.querySelector('#telefone') as HTMLInputElement;
 
 inputNome.addEventListener('input', () => removeErroAoDigita(inputNome))
 inputEmail.addEventListener('input', () => removeErroAoDigita(inputEmail))
@@ -23,8 +23,6 @@ form.addEventListener('submit', function (e) {
     if (!camposVazios(inputNome, inputEmail, inputTelefone)) return;
 
     validNome(inputNome);
-    console.log(validNome(inputNome));
-    
     validEmail(inputEmail);
     validTelefone(inputTelefone);
 

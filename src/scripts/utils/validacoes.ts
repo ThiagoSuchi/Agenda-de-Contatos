@@ -16,7 +16,7 @@ export function camposVazios(...inputs: HTMLInputElement[]): boolean {
     return campoValid
 }
 
-// Validando nome
+// Validando nome formulário de adicionar contato
 export function validNome(nome: HTMLInputElement): void {
     const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+)*$/u
     const nomesSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
@@ -38,6 +38,22 @@ export function validNome(nome: HTMLInputElement): void {
         msgErro(nome, 'Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
     }
 }
+
+// Validando nome formulário de editar contato
+export function validEditNome(nome: HTMLInputElement): void {
+    const nomeRegex = /^[a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+(?: [a-zA-ZÀ-ÿÀ-ÖØ-öø-ÿ0-9\p{Emoji_Presentation}]+)*$/u
+
+    removeErroAoDigita(nome);
+
+    if (nome.value.length < 4) {
+        msgErro(nome, 'O nome deve possuir no mínimo 4 caracteres!');
+    }
+
+    if (!nomeRegex.test(nome.value)) {
+        msgErro(nome, 'Nome inválido! Por favor, não use caracteres especiais como !, @, #, $, %, etc. Exemplos inválidos: João!, Ana$, Carlos@123.');
+    }
+}
+
 
 // Validando email
 export function validEmail(email: HTMLInputElement): void {
