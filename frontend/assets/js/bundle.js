@@ -97,8 +97,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   novoContato: () => (/* binding */ novoContato)
 /* harmony export */ });
+let idUnico = 1;
 function novoContato(nome, email, telefone) {
+    const gerarId = () => {
+        return idUnico++;
+    };
     const contato = {
+        id: gerarId(),
         nome,
         email,
         telefone
@@ -209,7 +214,8 @@ function deletContatos(opcao) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   editarContatos: () => (/* binding */ editarContatos)
+/* harmony export */   editarContatos: () => (/* binding */ editarContatos),
+/* harmony export */   toggleForm: () => (/* binding */ toggleForm)
 /* harmony export */ });
 /* harmony import */ var _utils_validacoes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/validacoes */ "./src/scripts/utils/validacoes.ts");
 /* harmony import */ var _msgErro__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./msgErro */ "./src/scripts/services/msgErro.ts");
@@ -218,63 +224,61 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function editarContatos() {
-    let contatosSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
     document.addEventListener('click', (e) => {
         var _a, _b;
         const target = e.target;
         if (target.classList.contains('editar') || target.classList.contains('edit')) {
             const nomeSelecionadoElement = (_a = target.closest('li')) === null || _a === void 0 ? void 0 : _a.querySelector('.nome-cnt');
             if (nomeSelecionadoElement) {
+                let contatosSalvos = JSON.parse(localStorage.getItem('contatos') || '[]');
                 const nomeSelecionado = (_b = nomeSelecionadoElement.textContent) === null || _b === void 0 ? void 0 : _b.trim();
                 // Está me retornando o nome, da li que cliquei
                 const contatoSelecionado = contatosSalvos.find(contato => contato.nome.trim() === nomeSelecionado);
-                if (contatoSelecionado) {
-                    const formEditar = document.querySelector('.editar-form');
-                    const inputEditNome = formEditar.querySelector('#nome');
-                    const inputEditEmail = formEditar.querySelector('#email');
-                    const inputEditTelefone = formEditar.querySelector('#telefone');
-                    if (!formEditar || !inputEditNome || !inputEditEmail || !inputEditTelefone) {
-                        console.log('Elemento não encontrado');
-                        return;
-                    }
-                    ;
-                    inputEditNome.value = contatoSelecionado.nome;
-                    inputEditEmail.value = contatoSelecionado.email;
-                    inputEditTelefone.value = contatoSelecionado.telefone;
-                    inputEditNome.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditNome));
-                    inputEditEmail.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditEmail));
-                    inputEditTelefone.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditTelefone));
-                    if (!formEditar.onsubmit) {
-                        formEditar.onsubmit = function (e) {
-                            e.preventDefault();
-                            if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposVazios)(inputEditNome, inputEditEmail, inputEditTelefone))
-                                return;
-                            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEditNome)(inputEditNome);
-                            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEmail)(inputEditEmail);
-                            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validTelefone)(inputEditTelefone);
-                            // Se o formulário estiver com todos o campos válidos, ai ele é enviado
-                            if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validFormulario)(this)) {
-                                const nome = inputEditNome.value.trim();
-                                const email = inputEditEmail.value.trim();
-                                const telefone = inputEditTelefone.value.trim();
-                                const contaIndex = contatosSalvos.findIndex(contato => contato.nome === contatoSelecionado.nome);
-                                if (contaIndex !== -1) {
-                                    contatosSalvos[contaIndex] = {
-                                        nome: nome,
-                                        email: email,
-                                        telefone: telefone
-                                    };
-                                }
-                                localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
-                                (0,_storage__WEBPACK_IMPORTED_MODULE_2__.exibirContatosLista)();
-                            }
-                        };
-                    }
-                }
+                atualizarEdicao(contatoSelecionado, contatosSalvos);
+                toggleForm();
             }
-            toggleForm();
         }
     });
+}
+// Captura as alterações do contato e salva no localStorage
+function atualizarEdicao(contatoSelecionado, contatosSalvos) {
+    const formEditar = document.querySelector('.editar-form');
+    const inputEditNome = formEditar.querySelector('#nome');
+    const inputEditEmail = formEditar.querySelector('#email');
+    const inputEditTelefone = formEditar.querySelector('#telefone');
+    if (!formEditar || !inputEditNome || !inputEditEmail || !inputEditTelefone) {
+        console.log('Elemento não encontrado');
+        return;
+    }
+    ;
+    if (contatoSelecionado) {
+        inputEditNome.value = contatoSelecionado.nome;
+        inputEditEmail.value = contatoSelecionado.email;
+        inputEditTelefone.value = contatoSelecionado.telefone;
+        inputEditNome.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditNome));
+        inputEditEmail.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditEmail));
+        inputEditTelefone.addEventListener('input', () => (0,_msgErro__WEBPACK_IMPORTED_MODULE_1__.removeErroAoDigita)(inputEditTelefone));
+        formEditar.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!(0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.camposVazios)(inputEditNome, inputEditEmail, inputEditTelefone))
+                return;
+            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEditNome)(inputEditNome);
+            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validEmail)(inputEditEmail);
+            (0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validTelefone)(inputEditTelefone);
+            // Se o formulário estiver com todos o campos válidos, ai ele é enviado
+            if ((0,_utils_validacoes__WEBPACK_IMPORTED_MODULE_0__.validFormulario)(this)) {
+                const nome = inputEditNome.value.trim();
+                const email = inputEditEmail.value.trim();
+                const telefone = inputEditTelefone.value.trim();
+                const index = contatosSalvos.findIndex(contato => contato.id === contatoSelecionado.id);
+                if (index !== -1) {
+                    contatosSalvos[index] = Object.assign(Object.assign({}, contatosSalvos[index]), { nome: nome, email: email, telefone: telefone });
+                }
+                localStorage.setItem('contatos', JSON.stringify(contatosSalvos));
+                (0,_storage__WEBPACK_IMPORTED_MODULE_2__.exibirContatosLista)();
+            }
+        });
+    }
 }
 function toggleForm() {
     const formulario = document.querySelector('.formulario');
@@ -282,7 +286,7 @@ function toggleForm() {
     const cancelar = document.querySelector('.btn-add.cancel');
     formulario.style.display = 'none';
     editForm.style.display = 'flex';
-    // Remove eventos duplicados
+    // Remove eventos duplicados - segurança para o código
     if (cancelar) {
         cancelar.removeEventListener('click', cancelarEdicao);
         cancelar.addEventListener('click', cancelarEdicao);
@@ -290,7 +294,6 @@ function toggleForm() {
     function cancelarEdicao() {
         formulario.style.display = 'flex';
         editForm.style.display = 'none';
-        return;
     }
 }
 
@@ -418,7 +421,7 @@ function exibirContatosLista() {
             const li = document.createElement('li');
             li.classList.add('contato-salvo');
             li.innerHTML = `
-                        <input type="checkbox" class="checkbox">
+                        <input type="checkbox" name="checkbox" class="checkbox">
                         <svg width="23" height="24" viewBox="0 0 29 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M23.2 8.16002C23.2 12.6667 19.3049 16.32 14.5 16.32C9.69514 16.32 5.8 12.6667 5.8 8.16002C5.8 3.65338 9.69514 0 14.5 0C19.3049 0 23.2 3.65338 23.2 8.16002ZM14.5 19.04C6.49188 19.04 0 25.129 0 32.64C0 33.391 0.649188 34 1.45 34H27.55C28.3508 34 29 33.391 29 32.64C29 25.129 22.5081 19.04 14.5 19.04Z" fill="white"/>
                         </svg>

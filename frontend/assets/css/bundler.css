@@ -3,6 +3,7 @@
   \*****************************************************************/
 :root {
     --cor-primaria-branco: white;
+    --cor-secundaria-cinza: #9c9c9c;
     --cor-tercearia-azul: #6492B1;
     --cor-quartaria-cinza: #7e7d7d;
     --cor-quintaria-cinza: #263838;
@@ -353,31 +354,54 @@ body {
 }
 
 .modal {
-    background: white;
-    padding: 20px;
+    background: var(--cor-opcoes-apagar-cinza);
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.363);
     text-align: center;
     max-width: 400px;
     width: 100%;
 }
 
+.modal p {
+   color: var(--cor-primaria-branco);
+   font-size: 15pt;
+   letter-spacing: 1px;
+}
+
 .modal button {
-    margin: 10px;
-    padding: 10px 20px;
+    margin: 30px 10px 10px;
+    padding: 10px 30px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    background: transparent;
 }
 
 .modal .btn-confirm {
-    background-color: var(--cor-modal-sim);
+    border: 1px solid var(--cor-secundaria-cinza);
+    color: var(--cor-secundaria-cinza);
+    font-size: 13pt;
+    letter-spacing: 1px;
+}
+
+.modal .btn-confirm:hover {
+    border: 1px solid var(--cor-modal-sim);
     color: var(--cor-quintaria-cinza);
+    background: var(--cor-modal-sim);
 }
 
 .modal .btn-cancel {
-    background-color: var(--cor-msgErro-vermelho);
-    color: var(--cor-primaria-branco);
+    border: 1px solid var(--cor-secundaria-cinza);
+    color: var(--cor-secundaria-cinza);
+    font-size: 13pt;
+    letter-spacing: 1px;
+}
+
+.modal .btn-cancel:hover {
+    border: 1px solid var(--cor-msgErro-vermelho);
+    color: var(--cor-opcoes-apagar-cinza);
+    background: var(--cor-msgErro-vermelho);
 }
 
 .menu-contatos .cnt-pessoa {
@@ -521,6 +545,7 @@ body {
     height: 8vh;
     margin-top: 10px;
     background: var(--cor-primaria-branco);
+    color: var(--cor-quintaria-cinza);
     border: none;
     border-radius: 3px;
     font-size: 14pt;
