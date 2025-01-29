@@ -512,7 +512,7 @@ body {
     box-sizing: border-box;
     border-radius: 10px;
     background-color: var(--cor-form-verde);
-    padding: 4rem 3rem;
+    padding: 4rem 2rem;
 }
 
 .form {
