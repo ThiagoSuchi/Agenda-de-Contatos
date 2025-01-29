@@ -58,7 +58,9 @@ agenda-de-contatos/
 │   │   │
 │   │   └── app.ts              # Arquivo do código principal
 │   │
-│   └── index.ts                # Arquivo de entrada do Webpack
+│   ├── index.ts                # Funções utilitárias 
+│   │
+│   └── style.css               # Estilização principal do projeto
 │
 ├── .gitignore                  # Arquivos e pastas para ignorar no Git
 │
