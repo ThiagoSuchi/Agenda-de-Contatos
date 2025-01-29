@@ -1,6 +1,5 @@
 import { Contatos } from "../models/contato";
 import { abrirModal, fecharModal } from "../utils/msgConfirmacao";
-import { toggleForm } from "./editar";
 
 export function deletContatos(opcao: 'unico' | 'varios') {
     const contatosSalvos: Contatos[] = JSON.parse(localStorage.getItem('contatos') || '[]');
