@@ -491,6 +491,7 @@ function listaContatosToggle() {
     btnFechar.addEventListener('click', () => {
         menuContatos.classList.remove('ativo');
         btnFechar.classList.remove('ativo');
+        location.reload();
     });
 }
 
@@ -540,7 +541,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function abrirModal() {
     const modal = document.getElementById("modal-confirm");
+    const formulario = document.querySelector('.formulario');
+    const editForm = document.querySelector('.editar-form');
     modal.classList.add("ativo");
+    formulario.style.display = 'flex';
+    editForm.style.display = 'none';
 }
 function fecharModal() {
     const modal = document.getElementById("modal-confirm");

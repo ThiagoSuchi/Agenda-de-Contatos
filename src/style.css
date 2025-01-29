@@ -1,14 +1,16 @@
 :root {
     --cor-primaria-branco: white;
     --cor-secundaria-cinza: #9c9c9c;
-    --cor-tercearia-azul: #6492B1;
+    --cor-tercearia-azul: #7faac7;
     --cor-quartaria-cinza: #7e7d7d;
     --cor-quintaria-cinza: #263838;
     --cor-opcoes-apagar-cinza: #1A2929;
-    --cor-sextaria-azul: #3BAEDA;
-    --cor-msgErro-vermelho: rgb(245, 72, 72);
+    --cor-modalNao-vermelho: #f54848;
+    --cor-msgErro-vermelho: #c90000;
     --cor-azul-escuro: #0D3D5E;
     --cor-modal-sim: #6DCC6D;
+    --cor-background-verde: #80a187;
+    --cor-form-verde: #5d805d;
 }
 
 * {
@@ -19,11 +21,10 @@
 }
 
 body {
-    overflow-y: hidden;
-    overflow-x: hidden;
-    min-height: 100vh;
-    min-width: 100vw;
-    background-image: url(./image/Group\ 3\ \(10\).jpg);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--cor-background-verde);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -56,6 +57,7 @@ body {
     background-color: var(--cor-tercearia-azul);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    box-shadow: -1px 1px 8px rgb(92, 124, 92);
     z-index: -1;
 }
 
@@ -77,7 +79,7 @@ body {
 }
 
 .contatos:active {
-    background-color: var(--cor-sextaria-azul);
+    background-color: var(--cor-tercearia-azul);
 }
 
 .btn-fechar {
@@ -97,7 +99,7 @@ body {
     transform: scale(1.07);
 }
 
-.btn-fechar.ativo{
+.btn-fechar.ativo {
     right: 31rem;
 }
 
@@ -149,12 +151,11 @@ body {
     min-height: 100%;
     background: var(--cor-azul-escuro);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    border-top-left-radius: 50px;
     z-index: 2;
     transition: .3s ease-in-out;
 }
 
-.menu-contatos.ativo{
+.menu-contatos.ativo {
     right: 0;
 }
 
@@ -177,7 +178,7 @@ body {
 .checkbox::after {
     content: "✔";
     font-size: 2rem;
-    color: transparent; 
+    color: transparent;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -186,7 +187,7 @@ body {
 }
 
 .checkbox:checked::after {
-    color: var(--cor-modal-sim); 
+    color: var(--cor-modal-sim);
 }
 
 .cnt-pessoa .sem-contato {
@@ -222,7 +223,7 @@ body {
     padding: 15px;
 }
 
-.menu-contatos .borda { 
+.menu-contatos .borda {
     position: absolute;
     margin-left: 1.6rem;
     width: 90%;
@@ -316,13 +317,13 @@ body {
 .apagar-estilo::before {
     content: '';
     position: absolute;
-    top: -9px; 
-    right: 11px; 
+    top: -9px;
+    right: 11px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 9px 9px 9px; 
-    border-color: transparent transparent var(--cor-opcoes-apagar-cinza); 
+    border-width: 0 9px 9px 9px;
+    border-color: transparent transparent var(--cor-opcoes-apagar-cinza);
 }
 
 .apagar-estilo2.ativo {
@@ -361,9 +362,9 @@ body {
 }
 
 .modal p {
-   color: var(--cor-primaria-branco);
-   font-size: 15pt;
-   letter-spacing: 1px;
+    color: var(--cor-primaria-branco);
+    font-size: 15pt;
+    letter-spacing: 1px;
 }
 
 .modal button {
@@ -396,9 +397,9 @@ body {
 }
 
 .modal .btn-cancel:hover {
-    border: 1px solid var(--cor-msgErro-vermelho);
+    border: 1px solid var(--cor-modalNao-vermelho);
     color: var(--cor-opcoes-apagar-cinza);
-    background: var(--cor-msgErro-vermelho);
+    background: var(--cor-modalNao-vermelho);
 }
 
 .menu-contatos .cnt-pessoa {
@@ -498,14 +499,17 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    gap: 12rem;
-    margin-top: 5rem;
+    gap: 6rem;
+    margin-top: 1rem;
 }
 
 .formulario {
     width: 100%;
     max-width: 500px;
     box-sizing: border-box;
+    border-radius: 10px;
+    background-color: var(--cor-form-verde);
+    padding: 4rem 3rem;
 }
 
 .form {
@@ -580,11 +584,16 @@ body {
     color: var(--cor-primaria-branco);
     background: var(--cor-azul-escuro);
     border: none;
-    transition: .2s ease-in-out;
+    transition: all .1s ease-in-out;
 }
 
 .btn-add:hover {
-    background: var(--cor-sextaria-azul);
+    color: var(--cor-quintaria-cinza);
+    background: var(--cor-tercearia-azul);
+}
+
+.btn-add:hover  h1{
+    color: var(--cor-quintaria-cinza);
 }
 
 .btn-add h1 {
@@ -600,6 +609,9 @@ body {
     display: none;
     width: 100%;
     max-width: 500px;
+    border-radius: 10px;
+    background-color: var(--cor-form-verde);
+    padding: 4rem 3rem;
 }
 
 .btns-add-cancel {
@@ -612,17 +624,31 @@ body {
     height: 41px;
 }
 
-.editar-form .btn-add.cancel {
-    background-color: transparent;
+.editar-form .btn-add:hover .icon {
+    stroke: var(--cor-quintaria-cinza);
+}
+
+.editar-form .btn-add.cancel { 
+    background: transparent;
     border: 2px solid var(--cor-azul-escuro);
 }
 
+.editar-form .btn-add.cancel h1 {
+    color: var(--cor-azul-escuro);
+    font-weight: 600;
+}
+
 .editar-form .btn-add.cancel:hover {
-    background: var(--cor-primaria-branco);
-    border: 2px solid var(--cor-primaria-branco);
+    background: var(--cor-tercearia-azul);
+    border: 2px solid var(--cor-tercearia-azul);
 }
 
 .editar-form .btn-add.cancel:hover h1 {
-    color: var(--cor-azul-escuro);
-    font-weight: 700;
+    color: var(--cor-quintaria-cinza);
+    font-weight: 600;
+}
+
+.imagem-logo {
+    width: 500px;
+    height: 500px;
 }

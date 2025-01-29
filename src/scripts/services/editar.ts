@@ -4,7 +4,6 @@ import { removeErroAoDigita } from "./msgErro";
 import { exibirContatosLista } from "./storage";
 
 export function editarContatos() {
-
     document.addEventListener('click', (e) => {
         const target = (e.target as HTMLElement)
 

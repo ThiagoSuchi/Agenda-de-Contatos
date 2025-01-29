@@ -11,5 +11,7 @@ export function listaContatosToggle() {
     btnFechar.addEventListener('click', () => {
         menuContatos.classList.remove('ativo');
         btnFechar.classList.remove('ativo');
+
+        location.reload()
     })
 }
