@@ -33,28 +33,40 @@ A **Agenda de Contatos** foi criada para ser uma aplicação funcional e prátic
 
 ```plaintext
 agenda-de-contatos/
+│
 ├── frontend/                   # Oque aparece no browser em tempo de desenvolvimento
+│   │
 │   ├── assets/                 # Arquivos que estruturam o index.html e são encapsulados pelo webpack
+│   │   │
 │   │   ├── css/                # Estilizações gerais
-│   │   │   └── style.css   
+│   │   │     
 │   │   └── js/                 # Pasta que armazena os arquivos js gerados pelo webpack
-│   │       ├── bundle.js
-│   │       └── bundle.js.map
+│   │
+│   ├── icons/                  # Pasta de icones e logo svg
+│   │
 │   └── index.html              # Página principal
+│
 ├── src/                        # Código fonte principal
+│   │
 │   ├── scripts/                # Scripts em TypeScript
-│   │   ├── app.ts              # Entrada principal da aplicação
+│   │   │
 │   │   ├── models/             # Modelos de dados
-│   │   │   └── contact.ts      # Definição da interface Contact
+│   │   │   
 │   │   ├── services/           # Serviços auxiliares
-│   │   │   └── storage.ts      # Funções relacionadas ao localStorage
-│   │   └── utils/              # Funções utilitárias
-│   │       └── validation.ts   # Validação de e-mail e telefone
+│   │   │
+│   │   ├── utils/              # Funções utilitárias       
+│   │   │
+│   │   └── app.ts              # Arquivo do código principal
+│   │
 │   └── index.ts                # Arquivo de entrada do Webpack
-├── webpack.config.js           # Configuração do Webpack
-├── package.json                # Gerenciamento de dependências
-├── tsconfig.json               # Configuração do TypeScript
-├── .tsconfig-frontend.json     #Configuraões especificas para o frontend
+│
 ├── .gitignore                  # Arquivos e pastas para ignorar no Git
-└── README.md                   # Documentação do projeto
+│
+├── package.json                # Gerenciamento de dependências
+│
+├── tsconfig-frontend.json     #Configuraões especificas para o frontend
+│
+├── tsconfig.json               # Configuração do TypeScript
+│
+└──webpack.config.js           # Configuração do Webpack
 
