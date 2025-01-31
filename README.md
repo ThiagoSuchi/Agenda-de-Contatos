@@ -23,7 +23,7 @@ A **Agenda de Contatos** foi criada para ser uma aplicação funcional e prátic
 
 ## Objetivos do Projeto
 
-1. **Praticar TypeScript**: Melhorar o domínio de JavaScript/TypeScript com um projeto prático.
+1. **Praticar TypeScript**: Melhorar o domínio de TypeScript com um projeto prático.
 2. **Entender o CRUD (Create, Read, Update, Delete)**: Implementar as operações CRUD para entender sua utilização no desenvolvimento web.
 3. **Aprender a utilizar o localStorage**: Usar o `localStorage` para persistir dados no navegador.
 4. **Desenvolver validação de formulários**: Validar entradas de dados e melhorar a experiência do usuário com feedback visual.
